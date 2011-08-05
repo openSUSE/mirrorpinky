@@ -5,3 +5,5 @@ db/*.sqlite3
 log/*.log
 tmp/
 .sass-cache/
+20110805/
+public/famfamfam_flag_icons

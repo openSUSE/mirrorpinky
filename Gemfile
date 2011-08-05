@@ -19,7 +19,7 @@ gem 'json'
 gem 'jquery-rails'
 
 # Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -27,3 +27,5 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
+
+#gem 'kaminari'
