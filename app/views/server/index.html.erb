@@ -52,49 +52,18 @@
     <col id="rsync" />
     <col id="prio" />
 
+    <% @markers.each do |marker| %>
     <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
-    <col />
+    <% end %>
     <thead>
       <tr>
         <th scope="col">Country</th>
         <th scope="col">Operator</th>
         <th scope="col" colspan="3">Mirror URLs</th>
         <th scope="col">Priority</th>
-
-        <th scope="col" class="a">11.3 CDs</th>
-        <th scope="col" class="b">11.3 DVDs</th>
-        <th scope="col" class="a">11.3 repo</th>
-        <th scope="col" class="b">11.3 repo debug</th>
-        <th scope="col" class="a">11.3 source</th>
-        <th scope="col" class="b">11.3 update</th>
-        <th scope="col" class="a">11.3 update debug</th>
-        <th scope="col" class="b">11.4 CDs</th>
-        <th scope="col" class="a">11.4 DVDs</th>
-        <th scope="col" class="b">11.4 repo</th>
-        <th scope="col" class="a">11.4 repo debug</th>
-        <th scope="col" class="b">11.4 source</th>
-        <th scope="col" class="a">11.4 update</th>
-        <th scope="col" class="b">11.4 update debug</th>
-        <th scope="col" class="a">BS</th>
-        <th scope="col" class="b">BS homes</th>
-        <th scope="col" class="a">BS hot</th>
-        <th scope="col" class="b">Factory</th>
+        <% @markers.each do |marker| %>
+        <th scope="col" class="todo"><%= marker.subtree_name %></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -118,24 +87,9 @@
   <td><%= link_to 'FTP',   server.baseurl_ftp   if server.baseurl_ftp.present?   %></td>
   <td><%= link_to 'RSYNC', server.baseurl_rsync if server.baseurl_rsync.present? %></td>
   <td title="<%= server.score %>"><%= '*' * server.starcount %></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
-  <td class="a"></td>
-  <td class="b"></td>
+  <% @markers.each do |marker| %>
+  <td scope="col" class="todo"><%= '&radic;'.html_safe if server.has_marked_file? marker.markers %></td>
+  <% end %>
 </tr>
 <% end %>
 </tbody>

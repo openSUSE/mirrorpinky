@@ -29,3 +29,4 @@ gem 'unicorn'
 
 
 #gem 'kaminari'
+gem 'ar_pg_array'
