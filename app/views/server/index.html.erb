@@ -114,9 +114,9 @@
 <tr>
   <td><%= image_tag "/famfamfam_flag_icons/png/#{server.country.code}.png", :alt => server.country.name, :title => server.country.name %> <%= server.country.name %></td>
   <td><%= !server.operator_url.blank? ? link_to(server.operator_name, server.operator_url) : server.operator_name %></td>
-  <td><%= link_to 'HTTP',  server.baseurl       if server.baseurl %></td>
-  <td><%= link_to 'FTP',   server.baseurl_ftp   if server.baseurl_ftp   %></td>
-  <td><%= link_to 'RSYNC', server.baseurl_rsync if server.baseurl_rsync %></td>
+  <td><%= link_to 'HTTP',  server.baseurl       if server.baseurl.present? %></td>
+  <td><%= link_to 'FTP',   server.baseurl_ftp   if server.baseurl_ftp.present?   %></td>
+  <td><%= link_to 'RSYNC', server.baseurl_rsync if server.baseurl_rsync.present? %></td>
   <td title="<%= server.score %>"><%= '*' * server.starcount %></td>
   <td class="a"></td>
   <td class="b"></td>
