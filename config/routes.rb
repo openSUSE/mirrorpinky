@@ -1,5 +1,6 @@
 Mirrorpinky::Application.routes.draw do
   get "server/index"
+  match 'list/:distro' => 'server#list', :distro => /.*/
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -52,7 +53,6 @@ Mirrorpinky::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   root :to => 'server#index'
-
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

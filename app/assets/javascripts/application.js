@@ -7,3 +7,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require ../bootstrap/js/bootstrap-alerts.js
+//= require ../bootstrap/js/bootstrap-buttons.js
+//= require ../bootstrap/js/bootstrap-dropdown.js
+//= require ../bootstrap/js/bootstrap-modal.js
+//= require ../bootstrap/js/bootstrap-popover.js
+//= require ../bootstrap/js/bootstrap-scrollspy.js
+//= require ../bootstrap/js/bootstrap-tabs.js
+//= require ../bootstrap/js/bootstrap-twipsy.js
