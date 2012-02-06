@@ -7,3 +7,4 @@ tmp/
 .sass-cache/
 20110805/
 public/famfamfam_flag_icons
+Gemfile.lock
