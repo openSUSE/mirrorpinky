@@ -8,3 +8,5 @@ tmp/
 20110805/
 public/famfamfam_flag_icons
 Gemfile.lock
+app/assets/stylesheets/bootstrap.css
+node_modules

@@ -4,14 +4,19 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
+//= require jquery-1.7.1.min
 //= require jquery_ujs
+//= require less-1.2.1
 //= require_tree .
-//= require ../bootstrap/js/bootstrap-alerts.js
-//= require ../bootstrap/js/bootstrap-buttons.js
+//= require ../bootstrap/js/bootstrap-alert.js
+//= require ../bootstrap/js/bootstrap-button.js
+//= require ../bootstrap/js/bootstrap-carousel.js
+//= require ../bootstrap/js/bootstrap-collapse.js
 //= require ../bootstrap/js/bootstrap-dropdown.js
 //= require ../bootstrap/js/bootstrap-modal.js
 //= require ../bootstrap/js/bootstrap-popover.js
 //= require ../bootstrap/js/bootstrap-scrollspy.js
-//= require ../bootstrap/js/bootstrap-tabs.js
-//= require ../bootstrap/js/bootstrap-twipsy.js
+//= require ../bootstrap/js/bootstrap-tab.js
+//= require ../bootstrap/js/bootstrap-tooltip.js
+//= require ../bootstrap/js/bootstrap-transition.js
+//= require ../bootstrap/js/bootstrap-typeahead.js

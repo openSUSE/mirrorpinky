@@ -51,5 +51,6 @@ module Mirrorpinky
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.js_compressor = false
   end
 end
