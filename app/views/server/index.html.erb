@@ -8,7 +8,7 @@
   <p>There are separate lists for openSUSE downloads. The following lists are available:</p>
   <p>Please send new mirrors, suggestions and corrections by mail to admin at opensuse org.</p>
 </div>
-<table summary="List of all mirrors">
+<table>
   <caption>Table with all mirrors, and what you will find on each</caption>
 
   <col id="country" />
@@ -43,7 +43,7 @@
         current_region = server.region.code
       %>
       <tr>
-        <td colspan="24" class="newregion"><a name="<%= server.region.code %>"></a><%= server.region.name %>:</td>
+        <td colspan="24" class="newregion" id="<%= server.region.code %>"><%= server.region.name %>:</td>
       </tr>
     <% end %>
     <tr>
@@ -54,7 +54,7 @@
       <td><%= link_to 'RSYNC', server.baseurl_rsync if server.baseurl_rsync.present? %></td>
       <td title="<%= server.score %>"><%= '*' * server.starcount %></td>
       <% @markers.each do |marker| %>
-        <td scope="col" class="todo"><%= '&radic;'.html_safe if server.has_marked_file? marker.markers %></td>
+        <td class="todo"><%= '&radic;'.html_safe if server.has_marked_file? marker.markers %></td>
       <% end %>
     </tr>
   <% end %>
