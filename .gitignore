@@ -12,3 +12,4 @@ app/assets/stylesheets/bootstrap.css
 node_modules
 public/assets/
 vendor/assets/images/
+*.swp
