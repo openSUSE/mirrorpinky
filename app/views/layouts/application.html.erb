@@ -43,8 +43,7 @@
             <ul class="nav pull-right ">
               <li>
               <% if signed_in? %>
-                <%= current_user.email %>
-                <%= link_to "Sign out", sign_out_path, :method => :delete %>
+                <%= link_to "Currently logged in as #{current_user.email} - Sign out", sign_out_path, :method => :delete %>
               <% else %>
                 <%= link_to "Sign in", sign_in_path %>
               <% end %>
@@ -65,14 +64,17 @@
               <% end -%>
               <li class="nav-header">Distribution</li>
               <% %w{12.1 11.4 11.3 Factory}.each do |distro| -%>
-                <li><%= link_to distro, "/list/#{distro}" %></a></li>
+                <li><%= link_to distro, "/list/#{distro}" %></li>
               <% end -%>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
           <% flash.each do |key, value| -%>
-            <div class="alert alert-block alert-<%= key %>"><%= value %></div>
+            <div class="alert alert-block alert-<%= key %>">
+              <!-- <a class="close">×</a> -->
+              <%= value %>
+            </div>
           <% end -%>
           <%= yield %>
         </div><!--/span-->
