@@ -40,22 +40,20 @@
               <li class="active"><a href="/">Home</a></li>
               <li><a href="mailto:admin@opensuse.org">Contact</a></li>
             </ul>
-            <p class="pull-right">
+            <ul class="nav pull-right ">
+              <li>
               <% if signed_in? %>
                 <%= current_user.email %>
                 <%= link_to "Sign out", sign_out_path, :method => :delete %>
               <% else %>
                 <%= link_to "Sign in", sign_in_path %>
               <% end %>
-            </p>
+              </li>
+            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-<!--
-      <div class="content">
-        <% yield %>
--->
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -74,9 +72,9 @@
         </div><!--/span-->
         <div class="span9">
           <% flash.each do |key, value| -%>
-            <div class="alert-message <%= key %>"><%= value %></div>
-            <%= yield %>
+            <div class="alert alert-block alert-<%= key %>"><%= value %></div>
           <% end -%>
+          <%= yield %>
         </div><!--/span-->
       </div><!--/row-->
       <hr />
