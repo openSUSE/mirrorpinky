@@ -31,3 +31,8 @@
     * I think the arbitrator becomes more important when we start notifying
       people... disabling a mirror for a few minutes in case of a problem is one
       thing ... spamming users with false alarms another.
+
+
+ TODO
+------
+* how to join an existing group
