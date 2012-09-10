@@ -1,4 +1,5 @@
 class Admin::ServersController < ApplicationController
+  before_filter :require_valid_user
   # GET /servers
   # GET /servers.json
   def index

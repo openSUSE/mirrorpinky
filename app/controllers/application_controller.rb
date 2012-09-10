@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
   def set_current_user
 #    Authorization.current_user = current_user
   end
+
+  def require_valid_user
+    redirect_to sign_in_path unless current_user
+  end
 end
