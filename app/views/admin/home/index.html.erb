@@ -1,0 +1,10 @@
+<h2>Hello</h2>
+
+<% @groups.each do |group| %>
+  <h3><%= group.name %></h3>
+  <ul>
+    <% group.servers.each do |srv| %>
+      <li><%= link_to srv.identifier, admin_server_path(srv) %></li>
+    <% end %>
+  </ul>
+<% end %>
