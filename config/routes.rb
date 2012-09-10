@@ -1,6 +1,12 @@
 Mirrorpinky::Application.routes.draw do
+  resources :groups
+
   get "server/index"
   match 'list/:distro' => 'server#list', :distro => /.*/
+  namespace :admin do
+    root :to => 'home#index'
+    resources :servers
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
