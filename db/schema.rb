@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111205155313) do
+ActiveRecord::Schema.define(:version => 20120820142109) do
 
   create_table "country", :force => true do |t|
     t.string "code", :limit => 2,  :null => false
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(:version => 20111205155313) do
 
   add_index "filearr", ["dirname"], :name => "filearr_dirname_btree"
   add_index "filearr", ["path"], :name => "filearr_path_key", :unique => true
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "groups_servers", :force => true do |t|
+    t.integer "groups_id"
+    t.integer "servers_id"
+  end
+
+  add_index "groups_servers", ["groups_id"], :name => "index_groups_servers_on_groups_id"
+  add_index "groups_servers", ["servers_id"], :name => "index_groups_servers_on_servers_id"
 
   create_table "hash", :id => false, :force => true do |t|
     t.integer "file_id",                    :null => false
@@ -55,6 +69,14 @@ ActiveRecord::Schema.define(:version => 20111205155313) do
     t.string "code", :limit => 2,  :null => false
     t.string "name", :limit => 64, :null => false
   end
+
+  create_table "roles", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "roles", ["title"], :name => "index_roles_on_title"
 
   create_table "server", :force => true do |t|
     t.string   "identifier",      :limit => 64,                                               :null => false
@@ -101,5 +123,13 @@ ActiveRecord::Schema.define(:version => 20111205155313) do
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  create_table "users_groups", :force => true do |t|
+    t.integer "users_id"
+    t.integer "groups_id"
+  end
+
+  add_index "users_groups", ["groups_id"], :name => "index_users_groups_on_groups_id"
+  add_index "users_groups", ["users_id"], :name => "index_users_groups_on_users_id"
 
 end
