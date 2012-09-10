@@ -4,10 +4,10 @@ class ServerController < ApplicationController
   def index
     @servers = Server.where(:enabled => true).order('region, country, identifier').includes(%w{region country})
     @markers = Marker.all
-    flash[:success] = 'woohoo!'
-    flash[:info] = 'hello!'
-    flash[:warning] = 'alarm!'
-    flash[:error] = 'dead!'
+   #flash[:success] = 'woohoo!'
+   #flash[:info] = 'hello!'
+   #flash[:warning] = 'alarm!'
+   #flash[:error] = 'dead!'
   end
 
   def list
