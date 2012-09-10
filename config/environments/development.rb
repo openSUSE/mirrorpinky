@@ -33,5 +33,12 @@ Mirrorpinky::Application.configure do
   config.assets.compress = false
 
   # TODO: create yml config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'm.opensu.se' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "postit.nordisch.org",
+    :domain               => 'opensu.se',
+    :enable_starttls_auto => true
+  }
+
 end
