@@ -1,4 +1,4 @@
-class GroupsController < ApplicationController
+class Admin::GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
