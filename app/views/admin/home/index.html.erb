@@ -1,10 +1,18 @@
 <h2>Hello</h2>
 
-<% @groups.each do |group| %>
+  <% if @groups.empty? %>
+    You are not part of any groups.
+  <% else %>
+  <% @groups.each do |group| %>
   <h3><%= group.name %></h3>
+  <% if group.servers.empty? %>
+    Your group does not have any servers.
+  <% else %>
   <ul>
     <% group.servers.each do |srv| %>
       <li><%= link_to srv.identifier, admin_server_path(srv) %></li>
     <% end %>
   </ul>
+  <% end %>
+  <% end %>
 <% end %>
