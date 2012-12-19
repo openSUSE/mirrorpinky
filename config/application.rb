@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require 'clearance'
+require 'postgres_ext'
 
 # If you have a Gemfile, require the default gems, the ones in the
 # current environment and also include :assets gems if in development
