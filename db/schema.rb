@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009120113) do
+ActiveRecord::Schema.define(version: 20131009123659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,13 +37,15 @@ ActiveRecord::Schema.define(version: 20131009120113) do
     t.datetime "updated_at"
   end
 
-  create_table "groups_servers", force: true do |t|
-    t.integer "groups_id"
-    t.integer "servers_id"
+  create_table "groups_server", force: true do |t|
+    t.integer "group_id"
+    t.integer "server_id"
   end
 
-  add_index "groups_servers", ["groups_id"], name: "index_groups_servers_on_groups_id", using: :btree
-  add_index "groups_servers", ["servers_id"], name: "index_groups_servers_on_servers_id", using: :btree
+  create_table "groups_users", force: true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
 
   create_table "hash", id: false, force: true do |t|
     t.integer "file_id",                 null: false
