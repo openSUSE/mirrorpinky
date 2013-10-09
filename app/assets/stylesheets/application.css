@@ -7,3 +7,7 @@
  *= require dist/css/bootstrap.css
  *= require dist/css/bootstrap-theme.css
 */
+@import "bento/reset";
+@import "bento/960";
+@import "bento/base";
+
