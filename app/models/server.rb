@@ -38,13 +38,14 @@ class Server < ActiveRecord::Base
 #   prefix: 134.76.0.0/16
 #   comment: |-
 
-  # def starcount
-  #   case score
-  #     when 0..49: 1
-  #     when 50..99: 2
-  #     else 3
-  #   end
-  # end
+  def starcount
+    # case score
+    #   when (0..49): 1
+    #   when (50..99): 2
+    #   else 3
+    # end
+    3
+  end
 
   def has_marked_file?(path)
     @@markers ||= Marker.all.map(&:markers)
