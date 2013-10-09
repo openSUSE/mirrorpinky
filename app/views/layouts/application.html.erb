@@ -41,7 +41,7 @@
             <ul class="nav pull-right ">
               <% if user_signed_in? %>
               <li>
-              <%= link_to "Currently logged in as #{current_user.email}", admin_root_path %> 
+              <%= link_to "Currently logged in as #{current_user.login}", admin_root_path %> 
               </li>
               <li>
               <%= link_to "Administer your servers", admin_root_path %> 
