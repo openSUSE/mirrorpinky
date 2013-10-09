@@ -1,6 +1,7 @@
 .bundle
 config/database.yml
 config/initializers/secret_token.rb
+config/initializers/devise.rb
 db/*.sqlite3
 log/*.log
 tmp/
@@ -8,6 +9,7 @@ tmp/
 20110805/
 public/famfamfam_flag_icons
 Gemfile.lock
+Gemfile.local
 app/assets/stylesheets/bootstrap.css
 node_modules
 public/assets/
