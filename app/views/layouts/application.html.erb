@@ -39,7 +39,7 @@
               <li><a href="mailto:admin@opensuse.org">Contact</a></li>
             </ul>
             <ul class="nav pull-right ">
-              <% if signed_in? %>
+              <% if user_signed_in? %>
               <li>
               <%= link_to "Currently logged in as #{current_user.email}", admin_root_path %> 
               </li>
@@ -47,11 +47,11 @@
               <%= link_to "Administer your servers", admin_root_path %> 
               </li>
               <li>
-                <%= link_to "Sign out", sign_out_path, :method => :delete %>
+                <%= link_to "Sign out", destroy_user_ichain_session_path, :method => :delete %>
               </li>
               <% else %>
               <li>
-                <%= link_to "Sign in", sign_in_path %>
+                <%= link_to "Sign in", new_user_ichain_session_path %>
               </li>
               <% end %>
             </ul>

@@ -1,20 +1,20 @@
 require 'tzinfo'
-require 'email_validator'
+# TODO: require File.join(Rails.root, 'lib', 'email_validator')
 
 class Server < ActiveRecord::Base
-  set_table_name 'server'
+  self.table_name = 'server'
   has_one :country, :primary_key => :country, :foreign_key => :code
   has_one :region,  :primary_key => :region,  :foreign_key => :code
   has_many :files,  :class_name => 'MirrorFile', :finder_sql => proc { "SELECT * FROM filearr where #{id} = any(mirrors)" }
-  validates :other_countries, :format => { :with => /\A([a-z0-9]{2}(,[a-z0-9]{2})*)?\Z/ }
-  validates :baseurl,         :format => { :with => URI::regexp(%w(ftp http https)) }
-  validates :baseurl_ftp,     :format => { :with => URI::regexp(%w(ftp))        }, :allow_blank => true
-  validates :baseurl_rsync,   :format => { :with => URI::regexp(%w(rsync))      }, :allow_blank => true
-  validates :operator_url,    :format => { :with => URI::regexp(%w(http https)) }, :allow_blank => true
-  validates :asn,             :numericality => { :only_integer => true }
-  validates :score,           :numericality => { :only_integer => true }
-  validates :identifier,      :presence => true, :uniqueness => true
-  validates_with ::AdminEmailValidator
+  # validates :other_countries, :format => { :with => /\A([a-z0-9]{2}(,[a-z0-9]{2})*)?\Z/ }
+  # validates :baseurl,         :format => { :with => URI::regexp(%w(ftp http https)) }
+  # validates :baseurl_ftp,     :format => { :with => URI::regexp(%w(ftp))        }, :allow_blank => true
+  # validates :baseurl_rsync,   :format => { :with => URI::regexp(%w(rsync))      }, :allow_blank => true
+  # validates :operator_url,    :format => { :with => URI::regexp(%w(http https)) }, :allow_blank => true
+  # validates :asn,             :numericality => { :only_integer => true }
+  # validates :score,           :numericality => { :only_integer => true }
+  # validates :identifier,      :presence => true, :uniqueness => true
+  # # TODO: validates_with ::AdminEmailValidator
 
   attr_accessible :admin, :admin_email, :as_only, :asn, :baseurl, :baseurl_ftp,
     :baseurl_rsync, :comment, :country, :country_only, :enabled, :file_maxsize,
@@ -38,13 +38,13 @@ class Server < ActiveRecord::Base
 #   prefix: 134.76.0.0/16
 #   comment: |-
 
-  def starcount
-    case score
-      when 0..49: 1
-      when 50..99: 2
-      else 3
-    end
-  end
+  # def starcount
+  #   case score
+  #     when 0..49: 1
+  #     when 50..99: 2
+  #     else 3
+  #   end
+  # end
 
   def has_marked_file?(path)
     @@markers ||= Marker.all.map(&:markers)

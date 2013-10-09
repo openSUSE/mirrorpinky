@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include Clearance::Authentication
   before_filter :preload_regions, :set_current_user
   protect_from_forgery
   private
