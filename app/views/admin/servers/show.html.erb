@@ -23,6 +23,15 @@
   <dt>Prefix only</dt>
   <dd><%= radio_button("server", "prefix_only", "true") %> Yes <%= radio_button("server", "prefix_only", "false") %> No</dd>
 </dl>
+<h3>URLs</h3>
+<dl>
+  <dt>HTTP</dt>
+  <dd><%= f.text_field(:baseurl, size: 72) %></dd>
+  <dt>FTP</dt>
+  <dd><%= f.text_field(:baseurl_ftp, size: 72) %></dd>
+  <dt>RSYNC</dt>
+  <dd><%= f.text_field(:baseurl_rsync, size: 72) %></dd>
+</dl>
 <h3>Server status</h3>
 <dl>
   <dt>Operational Status set by Admin</dt>
@@ -43,15 +52,6 @@
   <% end %>
   </dt>
 </dl>
-<h3>URLs</h3>
-<dl>
-  <dt>HTTP</dt>
-  <dd><%= f.text_field(:baseurl, size: 72) %></dd>
-  <dt>FTP</dt>
-  <dd><%= f.text_field(:baseurl_ftp, size: 72) %></dd>
-  <dt>RSYNC</dt>
-  <dd><%= f.text_field(:baseurl_rsync, size: 72) %></dd>
-</dl>
 <% unless @server.public_notes.blank? %>
 <h3>Public Notes</h3>
 <pre>
@@ -66,6 +66,10 @@
   <dd><%= @server.prefix %></dd>
   <dt>ASN</dt>
   <dd><%= @server.asn %></dd>
+  <% unless @server.last_scan.blank? %>
+  <dt>Last full scan</dt>
+  <dd><%= @server.last_scan %></dd>
+  <% end %>
   <% unless @server.other_countries.blank? %>
   <dt>Other countries</dt>
   <dd>
