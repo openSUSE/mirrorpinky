@@ -22,10 +22,10 @@
   <dd><%= f.text_field(:file_maxsize, size: 4) %> Bytes ('0' means: no limit)</dd>
   <dt>Score</dt>
   <dd><%= f.text_field(:score, size: 3) %>
-  <dt>Region only:  <%= f.check_box(:region_only, {:checked => @server.region_only}, true, false)  %></dt>
-  <dt>Country only: <%= f.check_box(:country_only, {:checked => @server.country_only}, true, false)  %></dt>
-  <dt>ASN only:     <%= f.check_box(:as_only, {:checked => @server.as_only}, true, false)  %></dt>
-  <dt>Prefix only:  <%= f.check_box(:prefix_only, {:checked => @server.prefix_only}, true, false)  %></dt>
+  <dt>Region only:  <%= f.check_box(:region_only)   %></dt>
+  <dt>Country only: <%= f.check_box(:country_only)  %></dt>
+  <dt>ASN only:     <%= f.check_box(:as_only)       %></dt>
+  <dt>Prefix only:  <%= f.check_box(:prefix_only)   %></dt>
 </dl>
 <h3>URLs</h3>
 <dl>
