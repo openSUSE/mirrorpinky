@@ -41,7 +41,7 @@ class Admin::ServersController < ApplicationController
   # POST /servers
   # POST /servers.json
   def create
-    @server = current_user.servers.new(params[:group])
+    @server = current_user.servers.new(params[:server])
 
     respond_to do |format|
       if @server.save
@@ -58,9 +58,10 @@ class Admin::ServersController < ApplicationController
   # PUT /servers/1.json
   def update
     @server = current_user.servers.find(params[:id])
+    Rails.logger.debug @server.inspect
 
     respond_to do |format|
-      if @server.update_attributes(params[:group])
+      if @server.update_attributes(params[:server])
         format.html { redirect_to @server, :notice => 'Server was successfully updated.' }
         format.json { head :no_content }
       else
