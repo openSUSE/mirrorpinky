@@ -17,10 +17,7 @@
   <dt>Other countries</dt>
   <dd>
     <%=
-      @server.other_countries.split(',').map do |c|
-        co = Country.where(:code => c).first
-        co ? co.name : "unknown country code (#{c})"
-      end.join(', ')
+      Country.where(code: @server.other_countries.split(/[, ]/)).select(:name).map(&:name).join(', ')
     %>
   </dd>
   <% end %>

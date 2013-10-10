@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   private
   def preload_regions
-    @regions = Region.order(:name).all
+    @regions = Region.order(:name).load
   end
 
   # for model based access control
