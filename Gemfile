@@ -41,6 +41,8 @@ gem 'declarative_authorization'
 gem 'bootstrap_forms'
 gem 'postgres_ext'
 
+gem 'rfc822'
+
 # add these gems to help with the transition:
 gem 'protected_attributes'
 gem 'rails-observers'
