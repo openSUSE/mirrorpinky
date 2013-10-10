@@ -15,7 +15,7 @@ class Server < ActiveRecord::Base
   validates :operator_url,    format: { with: URI::regexp(%w(http https)) }, allow_blank: true
   validates :asn,             numericality: { only_integer: true }
   validates :score,           numericality: { only_integer: true }, inclusion: 1..150
-  validates :identifier,      presence: true, uniqueness: true
+  validates :identifier,      presence: true# , uniqueness: true
   validates :admin_email,     format: { with: RFC822::EMAIL_REGEXP_WHOLE }
   validates :file_maxsize,    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   
