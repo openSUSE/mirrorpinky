@@ -74,7 +74,7 @@
                 <li><a href="#<%= region.code %>"><%= region.name %></a></li>
               <% end -%>
               <li class="nav-header">Markers</li>
-              <% @markers.each do |marker| -%>
+              <% @all_markers.each do |marker| -%>
                 <li><%= link_to marker.subtree_name, list_by_marker_path(marker) %></li>
               <% end -%>
             </ul>
