@@ -1,57 +1,4 @@
-<h2><%= @server.identifier %></h2>
-<h3>General informations</h3>
-<%= form_for [:admin,@server] do |f| %>
-<dl>
-  <dt>Operator Name</dt>
-  <dd><%= f.text_field(:operator_name, size: 72) %></dd>
-  <dt>Operator URL</dt>
-  <dd><%= f.text_field(:operator_url, size: 72) %></dd>
-  <dt>Admin Name</dt>
-  <dd><%= f.text_field(:admin, size: 72) %></dd>
-  <dt>Admin Email</dt>
-  <dd><%= f.text_field(:admin_email, size: 72) %></dd>
-  <dt>Large file support</dt>
-  <dd><%= f.text_field(:file_maxsize, size: 4) %> Bytes ('0' means: no limit)</dd>
-  <dt>Score</dt>
-  <dd><%= f.text_field(:score, size: 3) %>
-  <dt>Region only</dt>
-  <dd><%= radio_button("server", "region_only", "true") %> Yes <%= radio_button("server", "region_only", "false") %> No</dd>
-  <dt>Country only</dt>
-  <dd><%= radio_button("server", "country_only", "true") %> Yes <%= radio_button("server", "country_only", "false") %> No</dd>
-  <dt>ASN only</dt>
-  <dd><%= radio_button("server", "as_only", "true") %> Yes <%= radio_button("server", "as_only", "false") %> No</dd>
-  <dt>Prefix only</dt>
-  <dd><%= radio_button("server", "prefix_only", "true") %> Yes <%= radio_button("server", "prefix_only", "false") %> No</dd>
-</dl>
-<h3>URLs</h3>
-<dl>
-  <dt>HTTP</dt>
-  <dd><%= f.text_field(:baseurl, size: 72) %></dd>
-  <dt>FTP</dt>
-  <dd><%= f.text_field(:baseurl_ftp, size: 72) %></dd>
-  <dt>RSYNC</dt>
-  <dd><%= f.text_field(:baseurl_rsync, size: 72) %></dd>
-</dl>
-<h3>Server status</h3>
-<dl>
-  <dt>Operational Status set by Admin</dt>
-  <dd><%= radio_button("server", "enabled", "true") %> Yes <%= radio_button("server", "enabled", "false") %> No</dd>
-  <dt>Server status checked by mirror probe (by probing the HTTP base url)</dt>
-  <% if @server.status_baseurl == true  %>
-  <dd>Enabled</dd>
-  <% else %>
-  <dd>Disabled</dd>
-  <% end %>
-</dl>
-<dl>
-  <dt>Overall status: 
-  <% if @server.status_baseurl == true && @server.enabled == true %>
-  Enabled
-  <% else %>
-  Disabled
-  <% end %>
-  </dt>
-</dl>
+<%= render partial: 'form' %>
 <% unless @server.public_notes.blank? %>
 <h3>Public Notes</h3>
 <pre>
@@ -83,5 +30,3 @@
 <pre>
 <%= @server.comment %>
 </pre>
-<%= f.submit "Submit" %>
-<% end %>
