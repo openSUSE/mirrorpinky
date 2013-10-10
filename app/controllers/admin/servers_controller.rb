@@ -59,7 +59,7 @@ class Admin::ServersController < ApplicationController
   def update
     respond_to do |format|
       if @server.update_attributes(params[:server])
-        format.html { redirect_to @server, :notice => 'Server was successfully updated.' }
+        format.html { redirect_to admin_group_server_url(@group, @server), :notice => 'Server was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
@@ -74,7 +74,7 @@ class Admin::ServersController < ApplicationController
     @server.destroy
 
     respond_to do |format|
-      format.html { redirect_to servers_url }
+      format.html { redirect_to admin_group_servers_url }
       format.json { head :no_content }
     end
   end
