@@ -3,6 +3,8 @@ require 'rfc822'
 
 class Server < ActiveRecord::Base
   self.table_name = 'server'
+  has_and_belongs_to_many :group
+
   has_one :country, primary_key: :country, foreign_key: :code
   has_one :region,  primary_key: :region,  foreign_key: :code
   has_many :files,  class_name: 'MirrorFile', finder_sql: proc { "SELECT * FROM filearr where #{id} = any(mirrors)" }
