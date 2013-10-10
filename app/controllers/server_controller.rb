@@ -3,7 +3,7 @@ class ServerController < ApplicationController
 
   def index
     @servers = Server.where(:enabled => true).order('region, country, identifier').includes(%w{region country})
-    @all_markers = Marker.all
+    @markers = @all_markers
    #flash[:success] = 'woohoo!'
    #flash[:info] = 'hello!'
    #flash[:warning] = 'alarm!'
@@ -11,7 +11,6 @@ class ServerController < ApplicationController
   end
 
   def list
-    @all_markers = Marker.all
     @markers = []
     if params[:distro]
       @markers = Marker.where("subtree_name like ?", params[:distro] + '%' ).all

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   private
   def preload_regions
     @regions = Region.order(:name).load
+    @all_markers = Marker.all
   end
 
   # for model based access control
