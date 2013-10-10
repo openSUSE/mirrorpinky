@@ -1,7 +1,15 @@
 <h2><%= @server.identifier %></h2>
 <h3>General informations</h3>
-<%= form_for [:admin,@server] do |f| %>
+<%= form_for [:admin, @group, @server] do |f| %>
 <dl>
+  <dt>Identifier</dt>
+  <dd>
+    <% if @server.new_record? %>
+    <%= f.text_field(:identifier, size: 72) %>
+    <% else %>
+    <%= @server.identifier %>
+    <% end %>
+  </dd>
   <dt>Operator Name</dt>
   <dd><%= f.text_field(:operator_name, size: 72) %></dd>
   <dt>Operator URL</dt>

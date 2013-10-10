@@ -4,8 +4,9 @@ Mirrorpinky::Application.routes.draw do
   get 'list/by/marker/:marker', to: 'server#list', as: 'list_by_marker', :marker => /.*/
   namespace :admin do
     root :to => 'home#index'
-    resources :servers
-    resources :groups
+    resources :groups do
+      resources :servers
+    end
   end
 
   devise_for :users

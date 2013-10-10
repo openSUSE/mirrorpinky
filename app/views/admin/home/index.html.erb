@@ -10,10 +10,11 @@
 	  <% else %>
 	  <ul>
     	<% group.servers.each do |srv| %>
-	      <li><%= link_to srv.identifier, admin_server_path(srv) %></li>
+	      <li><%= link_to srv.identifier, admin_group_server_path(group, srv) %></li>
 	    <% end %>
 	  </ul>
 	  <% end %>
+	  <%= link_to "Add new mirror", new_admin_group_server_path(group) %>
   <% end %>
 <% end %>
-<%= link_to "Add new mirror", new_admin_server_path %>
+
