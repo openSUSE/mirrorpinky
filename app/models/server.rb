@@ -8,7 +8,7 @@ class Server < ActiveRecord::Base
   has_one :country, primary_key: :country, foreign_key: :code
   has_one :region,  primary_key: :region,  foreign_key: :code
   has_many :files,  class_name: 'MirrorFile', finder_sql: proc { "SELECT * FROM filearr where #{id} = any(mirrors)" }
-  validates :other_countries, format: { with: /\A([a-z0-9]{2}(,[a-z0-9]{2})*)?\Z/ }
+  validates :other_countries, format: { with: /\A([a-z0-9]{2}([, ][a-z0-9]{2})*)?\Z/ }
   validates :baseurl,         format: { with: URI::regexp(%w(http https)) }
   validates :baseurl_ftp,     format: { with: URI::regexp(%w(ftp))        }, allow_blank: true
   validates :baseurl_rsync,   format: { with: URI::regexp(%w(rsync))      }, allow_blank: true
