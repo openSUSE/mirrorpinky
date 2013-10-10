@@ -8,6 +8,7 @@ class Server < ActiveRecord::Base
   has_one :country, primary_key: :country, foreign_key: :code
   has_one :region,  primary_key: :region,  foreign_key: :code
   has_many :files,  class_name: 'MirrorFile', finder_sql: proc { "SELECT * FROM filearr where #{id} = any(mirrors)" }
+
   validates :other_countries, format: { with: /\A([a-z0-9]{2}([, ][a-z0-9]{2})*)?\Z/ }, allow_blank: true
   validates :baseurl,         format: { with: URI::regexp(%w(http https)) }
   validates :baseurl_ftp,     format: { with: URI::regexp(%w(ftp))        }, allow_blank: true
@@ -15,7 +16,7 @@ class Server < ActiveRecord::Base
   validates :operator_url,    format: { with: URI::regexp(%w(http https)) }, allow_blank: true
   validates :asn,             numericality: { only_integer: true }
   validates :score,           numericality: { only_integer: true }, inclusion: 1..150
-  validates :identifier,      presence: true , uniqueness: true
+  validates :identifier,      presence: true, uniqueness: true
   validates :admin_email,     format: { with: RFC822::EMAIL_REGEXP_WHOLE }
   validates :file_maxsize,    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   
