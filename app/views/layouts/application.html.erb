@@ -65,13 +65,17 @@
         <div class="col-md-3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
+              <li class="nav-header">Distribution</li>
+              <% %w{12.1 12.2 12.3 Factory}.each do |distro| -%>
+                <li><%= link_to distro, list_by_distro_path(distro: distro) %></li>
+              <% end -%>
               <li class="nav-header">Region</li>
               <% @regions.each do |region| -%>
                 <li><a href="#<%= region.code %>"><%= region.name %></a></li>
               <% end -%>
-              <li class="nav-header">Distribution</li>
-              <% %w{12.1 11.4 11.3 Factory}.each do |distro| -%>
-                <li><%= link_to distro, "/list/#{distro}" %></li>
+              <li class="nav-header">Markers</li>
+              <% @markers.each do |marker| -%>
+                <li><%= link_to marker.subtree_name, list_by_marker_path(marker) %></li>
               <% end -%>
             </ul>
           </div><!--/.well -->
