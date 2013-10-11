@@ -56,6 +56,7 @@ class Admin::ServersController < ApplicationController
     Rails.logger.debug @server.inspect
     respond_to do |format|
       if @server.save
+        @group.servers << @server
         format.html { redirect_to admin_group_server_url(@group,@server), :notice => 'Server was successfully created.' }
         format.json { render :json => @server, :status => :created, :location => @server }
       else
