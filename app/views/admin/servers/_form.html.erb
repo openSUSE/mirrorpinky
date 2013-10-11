@@ -39,7 +39,7 @@
 <h3>Server status</h3>
 <dl>
   <dt>Operational Status set by Admin</dt>
-  <dd><%= radio_button("server", "enabled", "true") %> Yes <%= radio_button("server", "enabled", "false") %> No</dd>
+  <dd>Enable redirects <%= f.check_box(:enabled) %></dd>
   <dt>Server status (checked by mirror probe by probing the HTTP base url):
   <% if @server.status_baseurl == true  %>
   Enabled
