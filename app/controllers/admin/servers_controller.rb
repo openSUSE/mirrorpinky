@@ -27,6 +27,8 @@ class Admin::ServersController < ApplicationController
   # GET /servers/new.json
   def new
     @server = Server.new
+    @server.score = 100
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @server }
@@ -41,11 +43,20 @@ class Admin::ServersController < ApplicationController
   # POST /servers.json
   def create
     @server = @group.servers.new(params[:server])
-
+    @server.status_baseurl = false
+    # TODO: set asn, prefix and geo data
+    @server.asn = 1
+    @server.region = Region.first
+    @server.country = Country.first
+    @server.prefix = '127.0.0.0/8'
+    @server.scan_fpm = 0
+    @server.comment = ''
+    @server.public_notes = ''
+    @server.other_countries = ''
     Rails.logger.debug @server.inspect
     respond_to do |format|
       if @server.save
-        format.html { redirect_to @server, :notice => 'Server was successfully created.' }
+        format.html { redirect_to admin_group_server_url(@group,@server), :notice => 'Server was successfully created.' }
         format.json { render :json => @server, :status => :created, :location => @server }
       else
         format.html { render :action => "new" }
