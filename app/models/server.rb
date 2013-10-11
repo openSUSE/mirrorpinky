@@ -5,8 +5,8 @@ class Server < ActiveRecord::Base
   self.table_name = 'server'
   has_and_belongs_to_many :group
 
-  has_one :country, primary_key: :country, foreign_key: :code
-  has_one :region,  primary_key: :region,  foreign_key: :code
+  belongs_to :country, foreign_key: :country
+  belongs_to :region, foreign_key: :region
   has_many :files,  class_name: 'MirrorFile', finder_sql: proc { "SELECT * FROM filearr where #{id} = any(mirrors)" }
 
   validates :other_countries, format: { with: /\A([a-z0-9]{2}([, ][a-z0-9]{2})*)?\Z/ }, allow_blank: true
