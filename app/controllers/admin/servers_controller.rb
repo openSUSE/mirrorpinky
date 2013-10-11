@@ -42,17 +42,23 @@ class Admin::ServersController < ApplicationController
   # POST /servers
   # POST /servers.json
   def create
-    @server = @group.servers.new(params[:server])
-    @server.status_baseurl = false
-    # TODO: set asn, prefix and geo data
-    @server.asn = 1
-    @server.region = Region.first
-    @server.country = Country.first
-    @server.prefix = '127.0.0.0/8'
-    @server.scan_fpm = 0
-    @server.comment = ''
-    @server.public_notes = ''
-    @server.other_countries = ''
+    # please set all the values here that we dont allow editing but where the DB requires it as non null
+    options_default = {
+      scan_fpm: 0,
+      score: 100,
+      comment: '',
+      public_notes: '',
+      other_countries: '',
+      status_baseurl: true,
+      # TODO: grab from http base url
+      asn: 1,
+      region: Region.first,
+      country: Country.first,
+      prefix: '127.0.0.0/8',
+      #
+    }
+    server_params = options_default.merge(params[:server])
+    @server = @group.servers.new(server_params)
     Rails.logger.debug @server.inspect
     respond_to do |format|
       if @server.save
