@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
-  include Clearance::Authentication
   before_filter :preload_regions, :set_current_user
   protect_from_forgery
   private
   def preload_regions
-    @regions = Region.order(:name).all
+    @regions = Region.order(:name).load
+    @all_markers = Marker.all
   end
 
   # for model based access control
@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_valid_user
-    redirect_to sign_in_path unless current_user
+    redirect_to new_user_ichain_session_path unless current_user
   end
 end

@@ -36,3 +36,9 @@
  TODO
 ------
 * how to join an existing group
+
+
+ Deployment
+------------
+
+- svn co http://svn.mirrorbrain.org/svn/mirrorbrain/trunk/mb/famfamfam_flag_icons/ app/assets/images/famfamfam_flag_icons/

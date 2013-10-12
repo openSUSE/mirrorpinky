@@ -1,18 +1,27 @@
-<h2>Hello</h2>
+<h2>Hello  <%= current_user.login %></h2>
 
   <% if @groups.empty? %>
     You are not part of any groups.
   <% else %>
-  <% @groups.each do |group| %>
-  <h3><%= group.name %></h3>
-  <% if group.servers.empty? %>
-    Your group does not have any servers.
-  <% else %>
-  <ul>
-    <% group.servers.each do |srv| %>
-      <li><%= link_to srv.identifier, admin_server_path(srv) %></li>
-    <% end %>
-  </ul>
-  <% end %>
+<p>Please note that anything you do here will have a direct influence on the mirror database. There is currently no way-back machine in place.</p>
+<p>Your login is currently connected to the iChain database - please excuse that your user data is not editable here.</p>
+<p>The mirrors are listed by groups, so if you are in more than one admin group, you might see more than one mirror you can edit.</p>
+      <% @groups.each do |group| %>
+      <h3><%= group.name %></h3>
+      <% if group.servers.empty? %>
+        Your group does not have any servers.
+      <% else %>
+      <ul>
+        <% group.servers.each do |srv| %>
+          <li>
+              <%= srv.identifier %> (
+              <%= link_to 'Edit', admin_group_server_path(group, srv) %> |
+              <%= link_to 'Delete', admin_group_server_path(group, srv), method: :delete, data: { confirm: 'Are you sure?' } %>
+              )
+          </li>
+        <% end %>
+      </ul>
+      <% end %>
+      <%= link_to "Add new mirror", new_admin_group_server_path(group) %>
   <% end %>
 <% end %>
