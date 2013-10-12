@@ -4,6 +4,7 @@
     You are not part of any groups.
   <% else %>
 <p>Please note that anything you do here will have a direct influence on the mirror database. There is currently no way-back machine in place.</p>
+<p>Your login is currently connected to the iChain database - please excuse that your user data is not editable here.</p>
 <p>The mirrors are listed by groups, so if you are in more than one admin group, you might see more than one mirror you can edit.</p>
       <% @groups.each do |group| %>
       <h3><%= group.name %></h3>
@@ -24,4 +25,3 @@
       <%= link_to "Add new mirror", new_admin_group_server_path(group) %>
   <% end %>
 <% end %>
-
