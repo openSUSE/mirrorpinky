@@ -8,7 +8,13 @@
 <h3>Additional information</h3>
 <dl>
   <dt>Geo Location</dt>
-  <dd><%= @server.country.name %>, <%= @server.region.name %> (<%= @server.lat %>/<%= @server.lng %>)</dd>
+  <dd><%= @server.country.name %>, <%= @server.region.name %> (<%= @server.lat %>/<%= @server.lng %>)
+  <% if @server.lat %>
+  <a href="http://maps.google.com/maps/api/staticmap?size=640x640&amp;maptype=terrain&amp;visible&amp;sensor=false&amp;zoom=10&amp;markers=size:mid|color:red|<%= @server.lat %>,<%= @server.lng %>">
+  <img src="http://maps.google.com/maps/api/staticmap?size=50x50&amp;maptype=terrain&amp;visible&amp;sensor=false&amp;markers=size:mid|color:red|<%= @server.lat %>,<%= @server.lng %>"/>
+  </a>
+  <% end %>
+  </dd>
   <dt>Prefix</dt>
   <dd><%= @server.prefix %></dd>
   <dt>ASN</dt>
