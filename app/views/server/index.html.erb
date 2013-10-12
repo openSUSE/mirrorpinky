@@ -1,14 +1,14 @@
 <!-- Main hero unit for a primary marketing message or call to action -->
 <div class="jumbotron">
   <h1>Overview</h1>
-  <p> This page lists mirror servers where you can download openSUSE. The below comprehensive table shows what you will find on which mirror. It is <em>not a static</em> and outdated list &mdash; it is generated every 30 minutes and reflects the last state which was seen by probing. Thus it should be highly accurate regarding content and availability of mirrors.</p>
-  <p> The master download server, <a href="http://download.opensuse.org/">download.opensuse.org</a>, automatically redirects you to a server near you. The information on this page is generated directly off the database used by the master download server. So under normal circumstances, there should be no need to use mirrors directly, and look at this table for that purpose.  If you <em>do</em> see the need, there might be something wrong and it would be appreciated if you notify the admins about it, so it can be fixed for the benefit of yourself, and possibly many other users.  </p>
-  <p>For downloading CD or DVD images, there is <a href="http://software.opensuse.org/">software.opensuse.org</a> to help with choosing the correct download. It also uses the below mirrors.  <a href="http://www.opensuse.org/Released_Version">Additional information</a> about downloading openSUSE can be found in the openSUSE wiki.</p>
-  <p>The best (and fastest!) way to download CD or DVD images is with a Metalink client.  Read this <a href="http://lizards.opensuse.org/2008/12/16/best-way-to-download-opensuse/">blog post explaining the "how" and "why"</a>, and the <a href="http://en.opensuse.org/Metalink">wiki page about Metalinks.</a>.</p>
-  <p>There are separate lists for openSUSE downloads. The following lists are available:</p>
-  <p>Please send new mirrors, suggestions and corrections by mail to admin at opensuse org.</p>
+  <p> This page lists mirror servers where you can download openSUSE. The below comprehensive table shows what you will find on which mirror. It is <em>not a static</em> and outdated list &mdash; it is generated on every request and reflects the last state which was seen by probing. Thus it should be highly accurate regarding content and availability of mirrors.</p>
+  <p> The master download server, <a href="http://download.opensuse.org/">download.opensuse.org</a>, automatically redirects you to a server near you. The information on this page is generated directly off the database used by the master download server. So under normal circumstances, there should be no need to use mirrors directly, and look at this table for that purpose.  If you <em>do</em> see the need, there might be something wrong and it would be appreciated if you notify the admins about it, so it can be fixed for the benefit of yourself, and possibly many other users.</p>
+  <p>For downloading CD or DVD images, there is <a href="http://software.opensuse.org/">software.opensuse.org</a> to help with choosing the correct download. It also uses the below mirrors.  <a href="http://en.opensuse.org/Released_version">Additional information</a> about downloading openSUSE can be found in the openSUSE wiki.</p>
+  <p>The best (and fastest!) way to download CD or DVD images is with a Metalink client.  Read this <a href="http://lizards.opensuse.org/2008/12/16/best-way-to-download-opensuse/">blog post explaining the "how" and "why"</a>, and the <a href="http://en.opensuse.org/SDB:Metalink">wiki page about Metalinks.</a>.</p>
+  <p>Please send new mirrors, suggestions and corrections to the <a href="http://en.opensuse.org/openSUSE:Services_team">openSUSE admins</a>.</p>
 </div>
-<table>
+<script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+<table id="mirrors" class="tablesorter">
   <caption>Table with all mirrors, and what you will find on each</caption>
 
   <col id="country" />
@@ -16,19 +16,13 @@
   <col id="http" />
   <col id="ftp" />
   <col id="rsync" />
-  <col id="prio" />
-
-  <% @markers.each do |marker| %>
-    <col />
-  <% end %>
   <thead>
     <tr>
       <th scope="col">Country</th>
       <th scope="col">Operator</th>
       <th scope="col" colspan="3">Mirror URLs</th>
-      <th scope="col">Priority</th>
       <% @markers.each do |marker| %>
-        <th scope="col" class="todo"><%= marker.subtree_name %></th>
+        <th scope="col" class="todo"><div class="rotate" style="font-size: smaller;"><%= marker.subtree_name %></div></th>
       <% end %>
     </tr>
   </thead>
@@ -43,16 +37,15 @@
         current_region = server.region.code
       %>
       <tr>
-        <td colspan="24" class="newregion" id="<%= server.region.code %>"><%= server.region.name %>:</td>
+        <td colspan="24" class="newregion" id="<%= server.region.code %>"><h4><%= server.region.name %>:</h4></td>
       </tr>
     <% end %>
     <tr>
       <td><%= image_tag "/assets/famfamfam_flag_icons/png/#{server.country.code}.png", :alt => server.country.name, :title => server.country.name %> <%= server.country.name %></td>
-      <td><%= !server.operator_url.blank? ? link_to(server.operator_name, server.operator_url) : server.operator_name %></td>
-      <td><%= link_to 'HTTP',  server.baseurl       if server.baseurl.present? %></td>
-      <td><%= link_to 'FTP',   server.baseurl_ftp   if server.baseurl_ftp.present?   %></td>
-      <td><%= link_to 'RSYNC', server.baseurl_rsync if server.baseurl_rsync.present? %></td>
-      <td title="<%= server.score %>"><%= '*' * server.starcount %></td>
+      <td><div style="word-wrap: break-word; padding-right:5px;"><%= !server.operator_url.blank? ? link_to(server.operator_name, server.operator_url) : server.operator_name %></div></td>
+      <td><div style="font-size: smaller;"><%= link_to 'HTTP',  server.baseurl       if server.baseurl.present? %>&nbsp;</div></td>
+      <td><div style="font-size: smaller;"><%= link_to 'FTP',   server.baseurl_ftp   if server.baseurl_ftp.present?   %>&nbsp;</div></td>
+      <td><div style="font-size: smaller;"><%= link_to 'RSYNC', server.baseurl_rsync if server.baseurl_rsync.present? %>&nbsp;</div></td>
       <% @markers.each do |marker| %>
         <td class="todo"><%= '&radic;'.html_safe if server.has_marked_file? marker.markers %></td>
       <% end %>
