@@ -1,8 +1,10 @@
-<h2>Hello</h2>
+<h2>Hello  <%= current_user.login %></h2>
 
   <% if @groups.empty? %>
     You are not part of any groups.
   <% else %>
+<p>Please note that anything you do here will have a direct influence on the mirror database. There is currently no way-back machine in place.</p>
+<p>The mirrors are listed by groups, so if you are in more than one admin group, you might see more than one mirror you can edit.</p>
       <% @groups.each do |group| %>
       <h3><%= group.name %></h3>
       <% if group.servers.empty? %>
