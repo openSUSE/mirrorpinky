@@ -1,0 +1,60 @@
+<a href="/admin">Back</a>
+<h2><%= @server.identifier %></h2>
+<h3>General informations</h3>
+<%= form_for [:admin, @group, @server] do |f| %>
+<dl>
+  <dt>Identifier</dt>
+  <dd>
+    <% if @server.new_record? %>
+    <%= f.text_field(:identifier, size: 72) %>
+    <% else %>
+    <%= @server.identifier %>
+    <% end %>
+  </dd>
+  <dt>Operator Name</dt>
+  <dd><%= f.text_field(:operator_name, size: 72) %></dd>
+  <dt>Operator URL</dt>
+  <dd><%= f.text_field(:operator_url, size: 72) %></dd>
+  <dt>Admin Name</dt>
+  <dd><%= f.text_field(:admin, size: 72) %></dd>
+  <dt>Admin Email</dt>
+  <dd><%= f.text_field(:admin_email, size: 72) %></dd>
+  <dt>Large file support</dt>
+  <dd><%= f.text_field(:file_maxsize, size: 4) %> Bytes ('0' means: no limit)</dd>
+  <dt>Score</dt>
+  <dd><%= f.text_field(:score, size: 3) %>
+  <dt>Region only:  <%= f.check_box(:region_only)   %></dt>
+  <dt>Country only: <%= f.check_box(:country_only)  %></dt>
+  <dt>ASN only:     <%= f.check_box(:as_only)       %></dt>
+  <dt>Prefix only:  <%= f.check_box(:prefix_only)   %></dt>
+</dl>
+<h3>URLs</h3>
+<dl>
+  <dt>HTTP</dt>
+  <dd><%= f.text_field(:baseurl, size: 72) %></dd>
+  <dt>FTP</dt>
+  <dd><%= f.text_field(:baseurl_ftp, size: 72) %></dd>
+  <dt>RSYNC</dt>
+  <dd><%= f.text_field(:baseurl_rsync, size: 72) %></dd>
+</dl>
+<h3>Server status</h3>
+<dl>
+  <dt>Operational Status set by Admin</dt>
+  <dd>Enable redirects <%= f.check_box(:enabled) %></dd>
+  <dt>Server status (checked by mirror probe by probing the HTTP base url):
+  <% if @server.status_baseurl == true  %>
+  Enabled
+  <% else %>
+  Disabled
+  <% end %>
+  </dt>
+  <dt>Overall status:
+  <% if @server.enabled and @server.status_baseurl %>
+  Enabled
+  <% else %>
+  Disabled
+  <% end %>
+  </dt>
+</dl>
+<%= f.submit "Submit" %>
+<% end %>

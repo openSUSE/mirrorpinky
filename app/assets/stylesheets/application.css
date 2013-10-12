@@ -4,4 +4,10 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require_tree .
+ *= require dist/css/bootstrap.css
+ *= require dist/css/bootstrap-theme.css
 */
+@import "bento/reset";
+@import "bento/960";
+@import "bento/base";
+

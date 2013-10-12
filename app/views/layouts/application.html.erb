@@ -20,62 +20,74 @@
       .sidebar-nav {
         padding: 9px 0;
       }
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+	  }
     </style>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="i-bar"></span>
-            <span class="i-bar"></span>
-            <span class="i-bar"></span>
-          </a>
-          <a class="brand" href="/">openSUSE Mirrors</a>
-          <div class="nav-collapse">
-            <ul class="nav">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="nav-collapse">
+         <div class=".container">
+          <a class="navbar-brand" href="/"><img src="/assets/header-logo.png" title="openSUSE Logo" alt="openSUSE Logo"> openSUSE Mirrors</a>
+          </div><!-- div.navbar-header -->
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
               <li class="active"><a href="/">Home</a></li>
+              <li><a href="http://en.opensuse.org/Portal:Mirrors">About</a></li>		
               <li><a href="mailto:admin@opensuse.org">Contact</a></li>
             </ul>
-            <ul class="nav pull-right ">
-              <% if signed_in? %>
+            <ul class="nav navbar-nav pull-right ">
+              <% if user_signed_in? %>
               <li>
-              <%= link_to "Currently logged in as #{current_user.email}", admin_root_path %> 
+              <%= link_to "Currently logged in as #{current_user.login}", admin_root_path %> 
               </li>
               <li>
               <%= link_to "Administer your servers", admin_root_path %> 
               </li>
               <li>
-                <%= link_to "Sign out", sign_out_path, :method => :delete %>
+                <%= link_to "Sign out", destroy_user_ichain_session_path, :method => :delete %>
               </li>
               <% else %>
               <li>
-                <%= link_to "Sign in", sign_in_path %>
+                <%= link_to "Sign in", new_user_ichain_session_path %>
               </li>
               <% end %>
             </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+         </div><!--/.nav-collapse -->
+       </div>
       </div>
     </div>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
+<!--/navbar -->
+<!--sitebar -->
+    <div class=".container">
+      <div class="row">
+        <div class="col-md-2">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
+              <li class="nav-header">Distribution</li>
+              <% %w{12.1 12.2 12.3 Factory}.each do |distro| -%>
+                <li><%= link_to distro, list_by_distro_path(distro: distro) %></li>
+              <% end -%>
               <li class="nav-header">Region</li>
               <% @regions.each do |region| -%>
                 <li><a href="#<%= region.code %>"><%= region.name %></a></li>
               <% end -%>
-              <li class="nav-header">Distribution</li>
-              <% %w{12.1 11.4 11.3 Factory}.each do |distro| -%>
-                <li><%= link_to distro, "/list/#{distro}" %></li>
+              <li class="nav-header">Markers</li>
+              <% @all_markers.each do |marker| -%>
+                <li><%= link_to marker.subtree_name, list_by_marker_path(marker) %></li>
               <% end -%>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9">
+<!--/sitebar -->
+        <div class="col-md-10">
           <% flash.each do |key, value| -%>
             <div class="alert alert-block alert-<%= key %>">
               <!-- <a class="close">×</a> -->
@@ -88,7 +100,7 @@
       <hr />
       <footer>
         <p class="pull-right">Generated at <%= Time.now.utc.to_s %> &mdash; powered by <%= link_to 'MirrorBrain', 'http://mirrorbrain.org/' -%>, <%= link_to "Ruby on Rails", 'http://www.rubyonrails.org/' -%> and <%= link_to "Twitter Bootstrap", 'http://twitter.github.com/bootstrap/' -%></p>
-        <p>&copy; openSUSE 2011</p>
+        <p>&copy; openSUSE 2011 - <%= Time.now.year %></p>
       </footer>
     </div><!--/.fluid-container-->
     <%= javascript_include_tag "application" %>

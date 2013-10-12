@@ -1,60 +1,38 @@
-<h2><%= @server.identifier %></h2>
-<h3>General informations</h3>
-<dl>
-  <dt>Operator</dt>
-  <dd><%= link_to @server.operator_name, @server.operator_url %></dd>
-  <dt>Admin</dt>
-  <dd><%= mail_to @server.admin_email, @server.admin %></dd>
-  <dt>Geo Location</dt>
-  <dd><%= @server.country.name %>, <%= @server.region.name %> (<%= @server.lat %>/<%= @server.lng %>)</dd>
-  <dt>Prefix</dt>
-  <dd><%= @server.prefix %></dd>
-  <dt>ASN</dt>
-  <dd><%= @server.asn %></dd>
-  <dt>Score</dt>
-  <dd><%= @server.score %></dd>
-  <% unless @server.other_countries.blank? %>
-  <dt>Other countries</dt>
-  <dd>
-    <%=
-      @server.other_countries.split(',').map do |c|
-        co = Country.where(:code => c).first
-        co ? co.name : "unknown country code (#{c})"
-      end.join(', ')
-    %>
-  </dd>
-  <% end %>
-  <dt>Large file support</dt>
-  <dd><%= @server.file_maxsize == 0 ? 'yes' : "no (#{@server.file_maxsize} bytes)" %></dd>
-  <dt>Region only</dt>
-  <dd><%= @server.region_only %></dd>
-  <dt>Country only</dt>
-  <dd><%= @server.country_only %></dd>
-  <dt>ASN only</dt>
-  <dd><%= @server.as_only %></dd>
-  <dt>Prefix only</dt>
-  <dd><%= @server.prefix_only %></dd>
-  <dt>Status</dt>
-  <dd><%= @server.enabled ? 'enabled' : 'disabled' %></dd>
-  <dt>Status of the HTTP base url</dt>
-  <dd><%= @server.status_baseurl ? 'enabled' : 'disabled' %></dd>
-</dl>
-<h3>URLs</h3>
-<dl>
-  <dt>HTTP</dt>
-  <dd><%= @server.baseurl.blank? ? '-' : @server.baseurl %></dd>
-  <dt>FTP</dt>
-  <dd><%= @server.baseurl_ftp.blank? ? '-' : @server.baseurl_ftp %></dd>
-  <dt>RSYNC</dt>
-  <dd><%= @server.baseurl_rsync.blank? ? '-' : @server.baseurl_rsync %></dd>
-</dl>
+<%= render partial: 'form' %>
 <% unless @server.public_notes.blank? %>
 <h3>Public Notes</h3>
 <pre>
 <%= @server.public_notes %>
 </pre>
 <% end %>
-<h3>Comment</h3>
+<h3>Additional information</h3>
+<dl>
+  <dt>Geo Location</dt>
+  <dd><%= @server.country.name %>, <%= @server.region.name %> (<%= @server.lat %>/<%= @server.lng %>)
+  <% if @server.lat %>
+  <a href="http://maps.google.com/maps/api/staticmap?size=640x640&amp;maptype=terrain&amp;visible&amp;sensor=false&amp;zoom=10&amp;markers=size:mid|color:red|<%= @server.lat %>,<%= @server.lng %>">
+  <img src="http://maps.google.com/maps/api/staticmap?size=50x50&amp;maptype=terrain&amp;visible&amp;sensor=false&amp;markers=size:mid|color:red|<%= @server.lat %>,<%= @server.lng %>"/>
+  </a>
+  <% end %>
+  </dd>
+  <dt>Prefix</dt>
+  <dd><%= @server.prefix %></dd>
+  <dt>ASN</dt>
+  <dd><%= @server.asn %></dd>
+  <% unless @server.last_scan.blank? %>
+  <dt>Last full scan</dt>
+  <dd><%= @server.last_scan %></dd>
+  <% end %>
+  <% unless @server.other_countries.blank? %>
+  <dt>Other countries</dt>
+  <dd>
+    <%=
+      Country.where(code: @server.other_countries.split(/[, ]/)).select(:name).map(&:name).join(', ')
+    %>
+  </dd>
+  <% end %>
+</dl>
+<h3>Admin Comment</h3>
 <pre>
 <%= @server.comment %>
 </pre>
