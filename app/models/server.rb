@@ -20,11 +20,15 @@ class Server < ActiveRecord::Base
   validates :baseurl_rsync,   format: { with: URI::regexp(%w(rsync))      }, allow_blank: true
   validates :operator_url,    format: { with: URI::regexp(%w(http https)) }, allow_blank: true
   validates :asn,             numericality: { only_integer: true }
-  validates :score,           numericality: { only_integer: true }, inclusion: 1..150
+  validates :score,           numericality: { only_integer: true }, inclusion: 1..150, presence: true
   validates :identifier,      presence: true, uniqueness: true
   validates :admin_email,     format: { with: RFC822::EMAIL_REGEXP_WHOLE }
   validates :file_maxsize,    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  
+  validates :scan_fpm,        numericality: { only_integer: true }, presence: true
+  validates :comment,         presence: true, allow_blank: true
+  validates :public_notes,    presence: true, allow_blank: true
+  validates :other_countries, presence: true, allow_blank: true
+  validates :status_baseurl,  presence: true
   # attr_accessible :admin, :admin_email, :as_only, :asn, :asnprefix,  :baseurl, :baseurl_ftp,
   #   :baseurl_rsync, :comment, :country, :country_only, :enabled, :file_maxsize,
   #   :id, :identifier, :last_scan, :lat, :lng, :operator_name, :operator_url,
