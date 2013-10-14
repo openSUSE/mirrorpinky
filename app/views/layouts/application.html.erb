@@ -11,7 +11,7 @@
     <meta name="keywords" content="openSUSE download metalink redirector mirror mirrors" />
     <meta name="author" content="openSUSE project" />
     <meta name="robots" content="index, nofollow" />
-    <%= stylesheet_link_tag    "application" %>
+   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -30,6 +30,7 @@
 	  }
     </style>
     <%= csrf_meta_tags %>
+
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -103,6 +104,6 @@
         <p>&copy; openSUSE 2011 - <%= Time.now.year %></p>
       </footer>
     </div><!--/.fluid-container-->
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </body>
 </html>
