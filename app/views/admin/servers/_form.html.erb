@@ -2,6 +2,18 @@
 <h2><%= @server.identifier %></h2>
 <h3>General informations</h3>
 <%= form_for [:admin, @group, @server] do |f| %>
+  <% if @server.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@server.errors.count, "error") %> prohibited this foo from being saved:</h2>
+
+      <ul>
+      <% @server.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <dl>
   <dt>Identifier</dt>
   <dd>
