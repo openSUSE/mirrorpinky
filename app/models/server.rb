@@ -1,11 +1,13 @@
 require 'tzinfo'
 require 'rfc822'
+require 'extract_informations_from_host'
 
 class Server < ActiveRecord::Base
   self.table_name = 'server'
   has_and_belongs_to_many :group
 
-  before_validation :extract_informations, on: :create
+  before_validation :set_defaults, on: :create
+  before_validation :extract_informations, on: [:create,:update]
 
   belongs_to :country, foreign_key: :country
   belongs_to :region,  foreign_key: :region
@@ -23,11 +25,11 @@ class Server < ActiveRecord::Base
   validates :admin_email,     format: { with: RFC822::EMAIL_REGEXP_WHOLE }
   validates :file_maxsize,    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   
-  attr_accessible :admin, :admin_email, :as_only, :asn, :asnprefix,  :baseurl, :baseurl_ftp,
-    :baseurl_rsync, :comment, :country, :country_only, :enabled, :file_maxsize,
-    :id, :identifier, :last_scan, :lat, :lng, :operator_name, :operator_url,
-    :other_countries, :prefix, :prefix_only, :public_notes, :region,
-    :region_only, :scan_fpm, :score, :status_baseurl
+  # attr_accessible :admin, :admin_email, :as_only, :asn, :asnprefix,  :baseurl, :baseurl_ftp,
+  #   :baseurl_rsync, :comment, :country, :country_only, :enabled, :file_maxsize,
+  #   :id, :identifier, :last_scan, :lat, :lng, :operator_name, :operator_url,
+  #   :other_countries, :prefix, :prefix_only, :public_notes, :region,
+  #   :region_only, :scan_fpm, :score, :status_baseurl
 
 # TODO: check if we need validators for those
 #   file_maxsize: 0
@@ -50,6 +52,15 @@ class Server < ActiveRecord::Base
   end
 
   private
+  def set_defaults
+    self.scan_fpm=0
+    self.score=100
+    self.comment=''
+    self.public_notes=''
+    self.other_countries=''
+    self.status_baseurl=true
+  end
+
   def extract_informations
 # #<ExtractInformations:0x0000000463ab60
 #  @results=
@@ -112,14 +123,14 @@ class Server < ActiveRecord::Base
           end
         end
         if data[:city]
-          self.region  ||= Region.where(code:  data[:city].continent_code.downcase).first
-          self.country ||= Country.where(code: data[:city].country_code2.downcase).first
-          self.lat     ||= data[:city].latitude
-          self.lng     ||= data[:city].longitude
+          self.region  = Region.where(code:  data[:city].continent_code.downcase).first
+          self.country = Country.where(code: data[:city].country_code2.downcase).first
+          self.lat     = data[:city].latitude
+          self.lng     = data[:city].longitude
         end
         if data[:asn_from_db]
-          self.asnprefix ||= data[:asn_from_db]
-          self.prefix    ||= data[:asn_from_db].pfx
+          self.asnprefix = data[:asn_from_db]
+          self.prefix    = data[:asn_from_db].pfx
         end
       end
       if e.results[:ipv4_addresses].empty? and !e.results[:ipv6_addresses].empty?

@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_valid_user
-    redirect_to new_user_ichain_session_path unless current_user
+    redirect_to new_user_ichain_session_path unless user_signed_in?
   end
 end

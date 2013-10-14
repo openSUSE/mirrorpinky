@@ -4,7 +4,7 @@ require 'rails/all'
 require 'devise'
 require 'devise_ichain_authenticatable'
 require 'postgres_ext'
-require 'protected_attributes'
+# require 'protected_attributes'
 
 
 # If you have a Gemfile, require the default gems, the ones in the

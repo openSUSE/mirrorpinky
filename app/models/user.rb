@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_many :servers, :through => :groups
   validates :email, :uniqueness => true
-  attr_accessible :email
+  # attr_accessible :email
 
   def self.for_ichain_username(username, attributes)
     if user = where(login: username).first

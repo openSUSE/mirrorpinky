@@ -1,4 +1,3 @@
-require 'extract_informations_from_host'
 class Admin::ServersController < ApplicationController
   before_filter :require_valid_user
   before_filter :load_group
@@ -43,18 +42,8 @@ class Admin::ServersController < ApplicationController
   # POST /servers
   # POST /servers.json
   def create
-    # please set all the values here that we dont allow editing but where the DB requires it as non null
-    options_default = {
-      scan_fpm: 0,
-      score: 100,
-      comment: '',
-      public_notes: '',
-      other_countries: '',
-      status_baseurl: true,
-      #
-    }
-    server_params = options_default.merge(params[:server])
-    @server = @group.servers.new(server_params)
+    @server = @group.servers.new(create_params)
+    @server.valid?
     Rails.logger.debug @server.inspect
     respond_to do |format|
       if @server.save
@@ -72,7 +61,7 @@ class Admin::ServersController < ApplicationController
   # PUT /servers/1.json
   def update
     respond_to do |format|
-      if @server.update_attributes(params[:server])
+      if @server.update_attributes(server_params)
         format.html { redirect_to admin_group_server_url(@group, @server), :notice => 'Server was successfully updated.' }
         format.json { head :no_content }
       else
@@ -95,9 +84,17 @@ class Admin::ServersController < ApplicationController
 
   private
   def load_server
-    @server = current_user.servers.find(params[:id])
+    @server = current_user.servers.find(params.permit(:id)[:id])
   end
   def load_group
-    @group  = current_user.groups.where(id: params[:group_id]).first
+    @group  = current_user.groups.where(id: params.permit(:group_id)[:group_id]).first
+  end
+
+  def create_params
+    params.require(:server).permit([:identifier, :operator_name, :operator_url, :admin, :admin_email, :file_maxsize, :score, :region_only, :country_only, :as_only, :prefix_only, :baseurl, :baseurl_ftp, :baseurl_rsync, :enabled])
+  end
+
+  def server_params
+    params.require(:server).permit([:operator_name, :operator_url, :admin, :admin_email, :file_maxsize, :score, :region_only, :country_only, :as_only, :prefix_only, :baseurl, :baseurl_ftp, :baseurl_rsync, :enabled])
   end
 end
