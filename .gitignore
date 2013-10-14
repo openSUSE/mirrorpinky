@@ -16,3 +16,4 @@ public/assets/
 vendor/assets/images/
 *.swp
 app/assets/images/famfamfam_flag_icons/
+GeoIP/
