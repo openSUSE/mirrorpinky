@@ -6,7 +6,8 @@ class Server < ActiveRecord::Base
   has_and_belongs_to_many :group
 
   belongs_to :country, foreign_key: :country
-  belongs_to :region, foreign_key: :region
+  belongs_to :region,  foreign_key: :region
+  belongs_to :asnprefix,  primary_key: :asn, foreign_key: :asn
   has_many :files,  class_name: 'MirrorFile', finder_sql: proc { "SELECT * FROM filearr where #{id} = any(mirrors)" }
 
   validates :other_countries, format: { with: /\A([a-z0-9]{2}([, ][a-z0-9]{2})*)?\Z/ }, allow_blank: true
@@ -20,7 +21,7 @@ class Server < ActiveRecord::Base
   validates :admin_email,     format: { with: RFC822::EMAIL_REGEXP_WHOLE }
   validates :file_maxsize,    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   
-  attr_accessible :admin, :admin_email, :as_only, :asn, :baseurl, :baseurl_ftp,
+  attr_accessible :admin, :admin_email, :as_only, :asn, :asnprefix,  :baseurl, :baseurl_ftp,
     :baseurl_rsync, :comment, :country, :country_only, :enabled, :file_maxsize,
     :id, :identifier, :last_scan, :lat, :lng, :operator_name, :operator_url,
     :other_countries, :prefix, :prefix_only, :public_notes, :region,

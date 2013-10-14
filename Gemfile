@@ -42,6 +42,7 @@ gem 'bootstrap_forms'
 gem 'postgres_ext'
 
 gem 'rfc822'
+gem 'geoip'
 
 # add these gems to help with the transition:
 gem 'protected_attributes'
