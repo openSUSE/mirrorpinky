@@ -13,9 +13,14 @@ class ExtractInformations
     @@geoip_city_ipv6 = GeoIP.new('GeoIP/GeoLiteCityv6.dat.updated')
 
     uri = URI.parse(baseurl)
+    Rails.logger.debug(uri.inspect)
+    if uri.host.nil? or !%w{http https}.include?(uri.scheme)
+      raise ArgumentError, "'#{baseurl}' is not a valid http(s) url."
+    end
     @results = {}
     do_lookups(uri.host, results, :ipv4_addresses, Resolv::DNS::Resource::IN::A,    @@geoip_asn_ipv4, @@geoip_city_ipv4)
     do_lookups(uri.host, results, :ipv6_addresses, Resolv::DNS::Resource::IN::AAAA, @@geoip_asn_ipv6, @@geoip_city_ipv6)
+    raise ArgumentError, "Can not resolve hostname from '#{baseurl}'. Please make sure the hostname in your baseurl can be resolved." if @results.empty?
   end
 
   private
