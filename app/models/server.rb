@@ -51,8 +51,8 @@ class Server < ActiveRecord::Base
 
   def has_marked_file?(path)
     @@markers ||= Marker.all.map(&:markers)
-    @marked_files ||= MirrorFile.where("? = any(mirrors)", id).where(path: @@markers).select(:path).map(&:path)
-    @marked_files.include? path
+    @@marked_files ||= MirrorFile.where("? = any(mirrors)", id).where(path: @@markers).select(:path).map(&:path)
+    @@marked_files.include? path
   end
 
   private
