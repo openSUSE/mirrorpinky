@@ -4,8 +4,6 @@ class ServerController < ApplicationController
   def index
     @servers = Server.where(:enabled => true).order('region, country, identifier').includes(%w{region country})
     @markers = @all_markers
-    authorize! :read, @markers
-    authorize! :read, @servers
    #flash[:success] = 'woohoo!'
    #flash[:info] = 'hello!'
    #flash[:warning] = 'alarm!'
@@ -22,8 +20,6 @@ class ServerController < ApplicationController
     end
     @marker_files = MirrorFile.where(:path => @markers.map(&:markers)).select(:mirrors).map(&:mirrors).flatten
     @servers = Server.where(:enabled => true).order('region, country, identifier').includes(%w{region country}).where(id: @marker_files)
-    authorize! :read, @markers
-    authorize! :read, @servers
     render :template => 'server/index'
   end
 end
