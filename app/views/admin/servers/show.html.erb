@@ -1,4 +1,11 @@
 <%= render partial: 'form' %>
+<h3>Rsync ACL Entries</h3>
+<ul>
+<% @server.rsync_acls.each do |acl| %>
+  <li><%= acl.host %> (<%= acl.updated_at %>)</li>
+<% end %>
+</ul>
+<%= link_to "Add new ACL entry", new_admin_group_server_rsync_acl_path(@group,@server) %>
 <% unless @server.public_notes.blank? %>
 <h3>Public Notes</h3>
 <pre>

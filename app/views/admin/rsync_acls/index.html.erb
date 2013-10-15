@@ -1,0 +1,29 @@
+<h1>Listing admin_rsync_acls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Host</th>
+      <th>Server</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_rsync_acls.each do |admin_rsync_acl| %>
+      <tr>
+        <td><%= admin_rsync_acl.host %></td>
+        <td><%= admin_rsync_acl.server %></td>
+        <td><%= link_to 'Show', admin_rsync_acl %></td>
+        <td><%= link_to 'Edit', edit_admin_rsync_acl_path(admin_rsync_acl) %></td>
+        <td><%= link_to 'Destroy', admin_rsync_acl, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rsync acl', new_admin_rsync_acl_path %>

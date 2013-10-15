@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131015100127) do
+ActiveRecord::Schema.define(version: 20131015121651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 20131015100127) do
   end
 
   add_index "roles", ["title"], name: "index_roles_on_title", using: :btree
+
+  create_table "rsync_acls", force: true do |t|
+    t.string   "host"
+    t.integer  "server_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rsync_acls", ["server_id"], name: "index_rsync_acls_on_server_id", using: :btree
 
   create_table "server", force: true do |t|
     t.string   "identifier",      limit: 64,                                          null: false
