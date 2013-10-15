@@ -28,5 +28,32 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    user ||= anonymous_user
+    Rails.logger.debug("Current user #{user.inspect} with role #{user.role.inspect}")
+    case user.role.title.to_sym
+      when :admin then
+        can :manage, :all
+      when :user  then
+        can [:read, :update, :delete], Server
+        # can :create, ServerRequest
+        # can :create, GroupRequest
+        can :read, Group
+        can :read, Region
+        can :read, Marker
+        can :read, Country
+      else
+        # can :read, :all
+        can :read, Region
+        can :read, Marker
+        can :read, Server
+        can :read, Country
+    end
+  end
+
+  private
+  def anonymous_user
+    @cached_user ||= User.new(login: 'anonymous')
+    @cached_user.role = Role.where(title: 'anonymous').first
+    @cached_user
   end
 end
