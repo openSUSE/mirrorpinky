@@ -1,7 +1,6 @@
 require 'uri'
 require 'geoip'
 require 'resolv'
-require 'pry'
 
 class ExtractInformations
   attr_reader :results
