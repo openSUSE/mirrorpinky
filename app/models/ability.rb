@@ -34,19 +34,20 @@ class Ability
       when :admin then
         can :manage, :all
       when :user  then
-        can [:read, :update, :delete], Server
+        can :manage, :all
+        # can [:read, :update, :delete], Server
         # can :create, ServerRequest
         # can :create, GroupRequest
-        can :read, Group
-        can :read, Region
-        can :read, Marker
-        can :read, Country
+        # can :read, Group
+        # can :read, Region
+        # can :read, Marker
+        # can :read, Country
       else
-        # can :read, :all
-        can :read, Region
-        can :read, Marker
-        can :read, Server
-        can :read, Country
+        can :read, :all
+        # can [:read], Region
+        # can [:read], Marker
+        # can [:read], Server
+        # can [:read], Country
     end
   end
 
