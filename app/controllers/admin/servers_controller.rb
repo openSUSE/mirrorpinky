@@ -85,6 +85,7 @@ class Admin::ServersController < ApplicationController
   private
   def load_server
     @server = current_user.servers.find(params.permit(:id)[:id])
+    authorize! @group, @server
   end
   def load_group
     @group  = current_user.groups.where(id: params.permit(:group_id)[:group_id]).first
