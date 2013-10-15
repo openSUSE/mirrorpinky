@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009123659) do
+ActiveRecord::Schema.define(version: 20131015100127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,9 @@ ActiveRecord::Schema.define(version: 20131009123659) do
     t.string "subtree_name", limit: 128, null: false
     t.string "markers",      limit: 512, null: false
   end
+
+# Could not dump table "pfx2asn" because of following StandardError
+#   Unknown type 'ip4r' for column 'pfx'
 
   create_table "region", force: true do |t|
     t.string "code", limit: 2,  null: false
@@ -124,6 +127,7 @@ ActiveRecord::Schema.define(version: 20131009123659) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "login"
+    t.integer  "role_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
