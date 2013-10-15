@@ -1,0 +1,21 @@
+<%= form_for([:admin, @group, @server, @admin_rsync_acl]) do |f| %>
+  <% if @admin_rsync_acl.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_rsync_acl.errors.count, "error") %> prohibited this admin_rsync_acl from being saved:</h2>
+
+      <ul>
+      <% @admin_rsync_acl.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :host %><br>
+    <%= f.text_field :host %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

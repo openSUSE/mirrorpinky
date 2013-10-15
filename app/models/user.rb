@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :groups
   has_many :servers, :through => :groups
+  has_many :rsync_acls, :through => :servers
   belongs_to :role
   validates :email, :uniqueness => true
   # attr_accessible :email

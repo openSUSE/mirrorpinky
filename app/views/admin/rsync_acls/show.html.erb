@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Host:</strong>
+  <%= @admin_rsync_acl.host %>
+</p>
+
+<p>
+  <strong>Server:</strong>
+  <%= @admin_rsync_acl.server %>
+</p>
+
+<%= link_to 'Edit', edit_admin_rsync_acl_path(@admin_rsync_acl) %> |
+<%= link_to 'Back', admin_rsync_acls_path %>

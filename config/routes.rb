@@ -5,7 +5,9 @@ Mirrorpinky::Application.routes.draw do
   namespace :admin do
     root :to => 'home#index'
     resources :groups do
-      resources :servers
+      resources :servers do
+        resources :rsync_acls
+      end
     end
   end
 
