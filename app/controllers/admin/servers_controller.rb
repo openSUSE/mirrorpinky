@@ -1,4 +1,6 @@
 class Admin::ServersController < ApplicationController
+  load_and_authorize_resource :group
+  load_and_authorize_resource :server, :through => :group
   before_filter :require_valid_user
   before_filter :load_group
   before_filter :load_server, only: [:show, :edit, :destroy, :update]

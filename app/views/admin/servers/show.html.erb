@@ -2,7 +2,7 @@
 <h3>Rsync ACL Entries</h3>
 <ul>
 <% @server.rsync_acls.each do |acl| %>
-  <li><%= acl.host %> (<%= acl.updated_at %>)</li>
+  <li><%= acl.host %> (<%= acl.updated_at %>) <%= link_to 'Destroy', admin_group_server_rsync_acl_path(@group, @server, acl), method: :delete, data: { confirm: 'Are you sure?' } %></li>
 <% end %>
 </ul>
 <%= link_to "Add new ACL entry", new_admin_group_server_rsync_acl_path(@group,@server) %>

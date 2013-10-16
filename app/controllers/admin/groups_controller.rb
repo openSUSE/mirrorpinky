@@ -1,8 +1,9 @@
 class Admin::GroupsController < ApplicationController
+  load_and_authorize_resource :group
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = current_user.groups.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +14,6 @@ class Admin::GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @group = Group.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @group }
@@ -34,14 +33,11 @@ class Admin::GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
-    @group = Group.find(params[:id])
   end
 
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(params[:group])
-
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, :notice => 'Group was successfully created.' }
@@ -56,8 +52,6 @@ class Admin::GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.json
   def update
-    @group = Group.find(params[:id])
-
     respond_to do |format|
       if @group.update_attributes(params[:group])
         format.html { redirect_to @group, :notice => 'Group was successfully updated.' }
@@ -72,7 +66,6 @@ class Admin::GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
-    @group = Group.find(params[:id])
     @group.destroy
 
     respond_to do |format|
