@@ -5,6 +5,7 @@ require 'devise'
 require 'devise_ichain_authenticatable'
 require 'postgres_ext'
 # require 'protected_attributes'
+require 'cancan'
 
 
 # If you have a Gemfile, require the default gems, the ones in the
