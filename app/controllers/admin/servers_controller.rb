@@ -1,4 +1,6 @@
 class Admin::ServersController < ApplicationController
+  load_and_authorize_resource :group
+  load_and_authorize_resource :server, :through => :group
   before_filter :require_valid_user
   before_filter :load_group
   before_filter :load_server, only: [:show, :edit, :destroy, :update]
@@ -85,6 +87,7 @@ class Admin::ServersController < ApplicationController
   private
   def load_server
     @server = current_user.servers.find(params.permit(:id)[:id])
+    authorize! @group, @server
   end
   def load_group
     @group  = current_user.groups.where(id: params.permit(:group_id)[:group_id]).first

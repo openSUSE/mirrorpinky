@@ -2,6 +2,7 @@ class ServerController < ApplicationController
 #  before_filter :authorize
 
   def index
+    authorize! :server, :index
     @servers = Server.where(:enabled => true).order('region, country, identifier').includes(%w{region country})
     @markers = @all_markers
    #flash[:success] = 'woohoo!'
@@ -11,6 +12,7 @@ class ServerController < ApplicationController
   end
 
   def list
+    authorize! :server, :lists
     @markers = []
     if params[:distro]
       @markers = Marker.where("subtree_name like ?", params[:distro] + '%' ).all
