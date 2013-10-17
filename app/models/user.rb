@@ -23,9 +23,10 @@ class User < ActiveRecord::Base
   def self.for_ichain_username(username, attributes)
     if user = where(login: username).first
       user.update_column(:email, attributes[:email]) if user.email != attributes[:email]
+      user.update_column(:role_id, Role.where(title: 'user').first.id) if user.role.nil?
       user
     else
-      user = create(login: username, email: attributes[:email])
+      user = create(login: username, email: attributes[:email], role: Role.where(title: 'user').first)
     end
   end
 end
