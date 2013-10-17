@@ -30,9 +30,9 @@ class Admin::RsyncAclRequestsController < ApplicationController
     @server = current_user.servers.find(params.require(:rsync_acl_request).permit(:server_id)[:server_id])
     authorize! :admin, @server
     @rsync_acl_request = @server.rsync_acl_requests.build(admin_rsync_acl_params)
+    @rsync_acl_request.server = @server
     # authorize! :admin, @rsync_acl_request
     if @rsync_acl_request.save
-      @server.rsync_acl_requests << @rsync_acl_request
       redirect_to admin_group_server_url(@server.group.first, @server), notice: 'rsync ACL request was successfully created.'
     else
       render action: 'new'
