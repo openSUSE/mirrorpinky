@@ -5,7 +5,7 @@ class Admin::GroupsController < ApplicationController
   def index
     @groups = current_user.is_admin? ? Group : current_user.groups
     @groups = @groups.all
-    # authorize! :admin, @groups
+    authorize! :admin, @groups
 
     respond_to do |format|
       format.html # index.html.erb
