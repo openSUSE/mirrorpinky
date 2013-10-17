@@ -1,0 +1,24 @@
+<h1>Listing group_requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_requests.each do |group_request| %>
+      <tr>
+        <td>
+            <%= group_request.name %>
+            (by <%= group_request.user.login %>)
+        </td>
+        <td><%= link_to 'Approve', admin_group_requests_approve_path(group_request), method: :post, data: { confirm: 'Are you sure?' }  %></td>
+        <td><%= link_to 'Destroy', admin_group_request_path(group_request), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

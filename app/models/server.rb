@@ -118,6 +118,7 @@ class Server < ActiveRecord::Base
     rescue ArgumentError => ex
       errors.add(:baseurl, ex.message)
     end
+    Rails.logger.debug("Informations extracted from the baseurl: #{e.inspect}")
     if e
       error_out_on_multiple_ips(e, :ipv4)
       error_out_on_multiple_ips(e, :ipv6)
@@ -147,7 +148,7 @@ class Server < ActiveRecord::Base
 
   def error_out_on_multiple_ips(e, ip_type)
     hash_index = "#{ip_type}_addresses".to_sym
-    if e.results[hash_index].length > 1
+    if e.results[hash_index] and e.results[hash_index].length > 1
       errors.add(:baseurl, "Your server resolves to multiple #{ip_type} address for the same host. This can cause problems. Please see http://mirrorbrain.org/archive/mirrorbrain/0042.html .")
     end
   end

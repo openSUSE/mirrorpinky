@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   # attr_accessible :email
 
+  def is_admin?
+    role.title == 'admin'
+  end
+
   def self.for_ichain_username(username, attributes)
     if user = where(login: username).first
       user.update_column(:email, attributes[:email]) if user.email != attributes[:email]

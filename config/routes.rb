@@ -9,8 +9,10 @@ Mirrorpinky::Application.routes.draw do
         resources :rsync_acls
       end
     end
+    resources :group_requests
     resources :rsync_acl_requests
     post 'rsync_acl_requests/approve/:id' , to: 'rsync_acl_requests#approve', as: 'rsync_acl_requests_approve'
+    post 'group_requests/approve/:id'     , to: 'group_requests#approve',     as: 'group_requests_approve'
   end
   
   devise_for :users

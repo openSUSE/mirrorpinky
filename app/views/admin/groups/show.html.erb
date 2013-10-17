@@ -4,7 +4,17 @@
   <b>Name:</b>
   <%= @group.name %>
 </p>
+<h2>Members</h2>
+<ul>
+  <% @group.users.each do |user| %>
+  <li><%= mail_to user.email, user.login %></li>
+  <% end %>
+</ul>
 
-
-<%= link_to 'Edit', edit_admin_group_path(@group) %> |
+<h2>Servers</h2>
+<ul>
+  <% @group.servers.each do |srv| %>
+  <li><%= link_to srv.identifier, admin_group_server_path(@group, srv) %></li>
+  <% end %>
+</ul>
 <%= link_to 'Back', admin_groups_path %>

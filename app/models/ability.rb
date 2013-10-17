@@ -48,7 +48,7 @@ class Ability
         can :read,    RsyncAcl, { id: user.rsync_acl_ids }
         can :destroy, RsyncAcl, { id: user.rsync_acl_ids }
         # can :create, ServerRequest
-        # can :create, GroupRequest
+        can :create, [:admin, GroupRequest]
         can :rsync_acl_request, :new
         can :rsync_acl_request, :create
         can :rsync_acl_request, :destroy

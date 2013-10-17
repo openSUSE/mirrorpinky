@@ -1,19 +1,9 @@
 class Admin::ServersController < ApplicationController
   load_and_authorize_resource :group
-  load_and_authorize_resource :server, :through => :group
-  before_filter :require_valid_user
-  before_filter :load_group
-  before_filter :load_server, only: [:show, :edit, :destroy, :update]
-  # GET /servers
+  load_and_authorize_resource :server, :through => :group, only: [:show, :edit, :update, :destroy, :approve]
   # GET /servers.json
   def index
     redirect_to admin_root_path
-    # @servers = current_user.servers.all
-
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.json { render :json => @servers }
-    # end
   end
 
   # GET /servers/1
@@ -45,8 +35,6 @@ class Admin::ServersController < ApplicationController
   # POST /servers.json
   def create
     @server = @group.servers.new(create_params)
-    @server.valid?
-    Rails.logger.debug @server.inspect
     respond_to do |format|
       if @server.save
         @group.servers << @server
@@ -63,7 +51,7 @@ class Admin::ServersController < ApplicationController
   # PUT /servers/1.json
   def update
     respond_to do |format|
-      if @server.update_attributes(server_params)
+      if @server.update_attributes(update_params)
         format.html { redirect_to admin_group_server_url(@group, @server), :notice => 'Server was successfully updated.' }
         format.json { head :no_content }
       else
@@ -97,7 +85,11 @@ class Admin::ServersController < ApplicationController
     params.require(:server).permit([:identifier, :operator_name, :operator_url, :admin, :admin_email, :file_maxsize, :score, :region_only, :country_only, :as_only, :prefix_only, :baseurl, :baseurl_ftp, :baseurl_rsync, :enabled])
   end
 
-  def server_params
+  def update_params
     params.require(:server).permit([:operator_name, :operator_url, :admin, :admin_email, :file_maxsize, :score, :region_only, :country_only, :as_only, :prefix_only, :baseurl, :baseurl_ftp, :baseurl_rsync, :enabled])
+  end
+
+  def server_params
+    params.require(:id)
   end
 end

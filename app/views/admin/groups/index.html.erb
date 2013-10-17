@@ -1,23 +1,13 @@
 <h1>Listing groups</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<ul>
 <% @groups.each do |group| %>
-  <tr>
-    <td><%= group.name %></td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_admin_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
-  </tr>
+  <li><%= link_to group.name, admin_group_path(group) %></li>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Group', new_group_path %>
+</ul>
+<p>
+<% if current_user.is_admin? %>
+  <%= link_to "Create new group", new_admin_group_path %>
+<% else %>
+  <%= link_to "Request new group", new_admin_group_request_path %>
+<% end %>
+</p>
