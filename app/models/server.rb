@@ -14,7 +14,7 @@ class Server < ActiveRecord::Base
   belongs_to :asnprefix,  primary_key: :asn, foreign_key: :asn
   has_many :files,  class_name: 'MirrorFile', finder_sql: proc { "SELECT * FROM filearr where #{id} = any(mirrors)" }
   has_many :rsync_acls
-  has_many :rsync_acl_request
+  has_many :rsync_acl_requests
 
   validates :other_countries, format: { with: /\A([a-z0-9]{2}([, ][a-z0-9]{2})*)?\Z/ }, allow_blank: true
   validates :baseurl,         format: { with: URI::regexp(%w(http https)) }

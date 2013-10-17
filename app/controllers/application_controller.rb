@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
 
   # for model based access control
   def set_current_user
-#    Authorization.current_user = current_user
-Rails.logger.debug(current_user.inspect)
+    # Authorization.current_user = current_user
+    Rails.logger.debug(current_user.inspect)
   end
 
   def require_valid_user

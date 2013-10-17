@@ -1,0 +1,26 @@
+<h1>Listing rsync ACL requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mirror Identifier</th>
+      <th>Rsync Host</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rsync_acl_requests.each do |rsync_acl_request| %>
+      <tr>
+        <td><%= rsync_acl_request.server.identifier %></td>
+        <td><%= rsync_acl_request.host %></td>
+        <td><%= link_to 'Approve', admin_rsync_acl_requests_approve_path(rsync_acl_request), method: :post, data: { confirm: 'Are you sure?' }  %></td>
+        <td><%= link_to 'Edit', edit_admin_rsync_acl_request_path(rsync_acl_request) %></td>
+        <td><%= link_to 'Destroy', admin_rsync_acl_request_path(rsync_acl_request), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

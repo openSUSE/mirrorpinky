@@ -49,7 +49,11 @@ class Ability
         can :destroy, RsyncAcl, { id: user.rsync_acl_ids }
         # can :create, ServerRequest
         # can :create, GroupRequest
-        # can :create, RsyncAclRequest
+        can :rsync_acl_request, :new
+        can :rsync_acl_request, :create
+        can :rsync_acl_request, :destroy
+        can :create, RsyncAclRequest
+        can :read,   RsyncAclRequest, { id: user.rsync_acl_request_ids }
 
         # dont have controller so we cant control them atm
         # can :read, Region

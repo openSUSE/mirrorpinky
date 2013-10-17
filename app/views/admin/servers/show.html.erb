@@ -1,11 +1,18 @@
 <%= render partial: 'form' %>
-<h3>Rsync ACL Entries</h3>
+<h3>Rsync ACLs</h3>
+<h4>Current ACL entries</h4>
 <ul>
 <% @server.rsync_acls.each do |acl| %>
   <li><%= acl.host %> (<%= acl.updated_at %>) <%= link_to 'Destroy', admin_group_server_rsync_acl_path(@group, @server, acl), method: :delete, data: { confirm: 'Are you sure?' } %></li>
 <% end %>
 </ul>
-<%= link_to "Add new ACL entry", new_admin_group_server_rsync_acl_path(@group,@server) %>
+<h4>Pending ACL Requests</h4>
+<ul>
+<% @server.rsync_acl_requests.each do |acl| %>
+  <li><%= acl.host %> (<%= acl.updated_at %>) <%= link_to 'Destroy', admin_rsync_acl_request_path(acl), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+<% end %>
+</ul>
+<%= link_to "Request a new ACL entry", new_admin_rsync_acl_request_path(server_id:@server) %>
 <% unless @server.public_notes.blank? %>
 <h3>Public Notes</h3>
 <pre>
