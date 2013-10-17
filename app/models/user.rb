@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   devise :ichain_authenticatable, :ichain_registerable
 
   has_and_belongs_to_many :groups
+  has_many :group_requests
   has_many :servers, :through => :groups
   has_many :rsync_acls, :through => :servers
   has_many :rsync_acl_requests, :through => :servers
