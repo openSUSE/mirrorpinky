@@ -37,6 +37,28 @@
 ------
 * how to join an existing group
 
+ Links collection
+------------------
+
+ Bugs
+======
+
+* [rubygem-GeoIP IPv6 support](https://github.com/cjheath/geoip/issues/17)
+
+ CanCan
+========
+
+* [Defininig Abilities](https://github.com/ryanb/cancan/wiki/defining-abilities)
+* [Debugging Abilities](https://github.com/ryanb/cancan/wiki/Debugging-Abilities)
+* [Nested Resources](https://github.com/ryanb/cancan/wiki/Nested-Resources)
+* [Authorizing Controller Actions](https://github.com/ryanb/cancan/wiki/authorizing-controller-actions)
+* [Non RESTful Controllers](https://github.com/ryanb/cancan/wiki/Non-RESTful-Controllers)
+
+ Misc
+======
+
+* [Bootstrap Forms](http://getbootstrap.com/css/#forms)
+* [Mirrorbrain and mirrors with multiple IPs](http://mirrorbrain.org/archive/mirrorbrain/0042.html)
 
  Deployment
 ------------
