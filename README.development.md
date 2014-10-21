@@ -1,2 +1,6 @@
 1. add devel:languages:ruby:extensions for your distro
-2. zypper in rubygem-pg rubygem-rails-3_2 rubygem-unicorn rubygem-clearance rubygem-declarative_authorization
+2. zypper in rubygem-bundler
+3. cd into your GIT checkout directory
+4. bundle install --path=bundle
+5. rails c # for the Rails console
+6. rails s # to start the builtin webserver
