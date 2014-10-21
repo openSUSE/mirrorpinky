@@ -1,4 +1,4 @@
-<%= form_for([:admin, @rsync_acl_request], server_id: @server) do |f| %>
+<%= form_for([:admin,@group,@server, @rsync_acl_request]) do |f| %>
   <% if @rsync_acl_request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@rsync_acl_request.errors.count, "error") %> prohibited this rsync acl request from being saved:</h2>

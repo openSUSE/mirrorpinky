@@ -1,4 +1,7 @@
 class Admin::RsyncAclRequestsController < ApplicationController
+  load_and_authorize_resource :group
+  load_and_authorize_resource :server, :through => :group
+
   # GET /admin/rsync_acls
   def index
     @rsync_acl_requests = RsyncAclRequest.all
@@ -13,8 +16,6 @@ class Admin::RsyncAclRequestsController < ApplicationController
   # GET /admin/rsync_acls/new
   def new
     authorize! :rsync_acl_request, :new
-    @server = current_user.servers.find(params.require(:server_id))
-    authorize! :admin, @server
     @rsync_acl_request = RsyncAclRequest.new
   end
 
@@ -27,8 +28,6 @@ class Admin::RsyncAclRequestsController < ApplicationController
   # POST /admin/rsync_acls
   def create
     authorize! :rsync_acl_request, :create
-    @server = current_user.servers.find(params.require(:rsync_acl_request).permit(:server_id)[:server_id])
-    authorize! :admin, @server
     @rsync_acl_request = @server.rsync_acl_requests.build(admin_rsync_acl_params)
     @rsync_acl_request.server = @server
     # authorize! :admin, @rsync_acl_request
@@ -60,7 +59,7 @@ class Admin::RsyncAclRequestsController < ApplicationController
     authorize! :admin, @server
     # TODO: authorize! :admin, @rsync_acl_request
     @rsync_acl_request.destroy
-    redirect_url = current_user.role.title == 'admin' ? admin_rsync_acl_requests_url : admin_group_server_url(@group, @server)
+    redirect_url = admin_group_server_url(@group, @server)
     redirect_to redirect_url, notice: 'rsync ACL request was successfully revoked.'
   end
 

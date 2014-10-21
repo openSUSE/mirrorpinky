@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
+    Rails.logger.debug "Access denied for '#{current_user.email}' with role '#{current_user.role.title}' on #{exception.action} #{exception.subject.inspect}"
     redirect_to(root_url, :alert => exception.message) unless current_user.is_admin?
   end
 end
