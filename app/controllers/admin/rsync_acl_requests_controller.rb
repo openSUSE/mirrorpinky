@@ -67,10 +67,8 @@ class Admin::RsyncAclRequestsController < ApplicationController
   def approve
     authorize! :rsync_acl_request, :approve
     @rsync_acl_request = RsyncAclRequest.find(params.require(:id))
-    rsync_acl = RsyncAcl.new(host: @rsync_acl_request.host)
-    @server = @rsync_acl_request.server
+    rsync_acl = RsyncAcl.new(host: @rsync_acl_request.host, server: @rsync_acl_request.server)
     if rsync_acl.save
-      @server.rsync_acls << rsync_acl
       @rsync_acl_request.delete
       redirect_to admin_rsync_acl_requests_path, notice: 'rsync ACL request was successfully created.'
     else
