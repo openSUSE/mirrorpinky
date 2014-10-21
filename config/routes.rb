@@ -7,10 +7,12 @@ Mirrorpinky::Application.routes.draw do
     resources :groups do
       resources :servers do
         resources :rsync_acls
+        resources :rsync_acl_requests
       end
     end
+
     resources :group_requests
-    resources :rsync_acl_requests
+
     post 'rsync_acl_requests/approve/:id' , to: 'rsync_acl_requests#approve', as: 'rsync_acl_requests_approve'
     post 'group_requests/approve/:id'     , to: 'group_requests#approve',     as: 'group_requests_approve'
   end
