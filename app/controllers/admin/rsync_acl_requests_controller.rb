@@ -71,10 +71,10 @@ class Admin::RsyncAclRequestsController < ApplicationController
     @server = @rsync_acl_request.server
     if rsync_acl.save
       @server.rsync_acls << rsync_acl
-      @rsync_acl_request.destroy
+      @rsync_acl_request.delete
       redirect_to admin_rsync_acl_requests_path, notice: 'rsync ACL request was successfully created.'
     else
-      render action: 'index'
+      redirect_to admin_rsync_acl_requests_path, notice: 'accepting the ACL request failed'
     end
   end
 
