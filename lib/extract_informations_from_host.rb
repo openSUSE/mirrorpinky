@@ -32,7 +32,7 @@ class ExtractInformations
         @results[ip_type][ip_address] = {}
         # TODO: this can fail for ipv6
         if ip_type == :ipv4_addresses
-          @results[ip_type][ip_address][:asn_from_db] = Asnprefix.by_ip(ip_address).first
+          @results[ip_type][ip_address][:asn_from_db] = Asnprefix.by_ip(ip_address).first || 0
         end
         begin
           @results[ip_type][ip_address][:asn]  = geoip_asn.asn(ip_address)
