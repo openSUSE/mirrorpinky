@@ -55,6 +55,7 @@ class Admin::GroupRequestsController < ApplicationController
     user  = @group_request.user
     if group.save
       group.users << @group_request.user
+      @group_request.delete
       redirect_to admin_group_requests_path, notice: 'Group request successfully accepted.'
     else
       render action: 'index'
