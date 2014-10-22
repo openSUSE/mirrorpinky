@@ -11,6 +11,22 @@
   <p>The mirrors are listed by groups, so if you are in more than one admin group, you might see more than one mirror you can edit.</p>
   <% @groups.each do |group| %>
     <h3><%= group.name %></h3>
+    <h4>Users</h4>
+    <% if group.users.empty? %>
+      <p>Your group does not have any users.</p>
+    <% else %>
+      <ul>
+        <%
+          group.users.each do |user|
+        %>
+          <li>
+          <%= user.login %> (TODO: Remove)
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <p><%= link_to "Add user", new_admin_group_server_path(group) %></p>
+    <h4>Servers</h4>
     <% if group.servers.empty? %>
       <p>Your group does not have any servers.</p>
     <% else %>
