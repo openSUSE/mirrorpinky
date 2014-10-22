@@ -46,7 +46,8 @@
 
 ## current implementation
 
-* adding a server #1
+### adding a server
+
   * user logs in
   * clicks on "Administer your servers"
   * Requests new group
@@ -54,72 +55,78 @@
 
 ## future
 
-* adding server #2
-  * user signs up
-  * clicks on "Administer your servers"
-  * Requests new group
-  * Can immediately request a server for this group by clicking "Add mirror"
-  * needs to enter the following fields
-    * operator name
-    * admin name
-    * admin email
-    * base url http
-  * can optionally enter
-    * operator url
-    * max file size in bytes
-    * score
-    * flags for region only, country only, AS only, prefix only
-    * base url ftp
-    * base url rsync
-    * public notes
+### adding server
+
+* user signs up
+* clicks on "Administer your servers"
+* Requests new group
+* Can immediately request a server for this group by clicking "Add mirror"
+* needs to enter the following fields
+  * operator name
+  * admin name
+  * admin email
+  * base url http
+* can optionally enter
+  * operator url
+  * max file size in bytes
+  * score
+  * flags for region only, country only, AS only, prefix only
+  * base url ftp
+  * base url rsync
+  * public notes
+* click submit
+* server can only be saved if all required fields are present and we can resolve the baseurl and map the IP to an AS,
+  * if not we return to the create view including an error message
+* once the server is saved rsync ACLs can be requested
+* request rsync ACLs with "Request a new ACL entry"
+* enter IP address/hostname
   * click submit
-  * server can only be saved if all required fields are present and we can resolve the baseurl and map the IP to an AS,
-    * if not we return to the create view including an error message
-  * once the server is saved rsync ACLs can be requested
-  * request rsync ACLs with "Request a new ACL entry"
-  * enter IP address/hostname
-    * click submit
 
-* editing server by user #1
-  * user signs up
-  * clicks on "Administer your servers"
-  * clicks on the server inside the group
-  * can change/edit the following fields without further approval:
-    * operatorName
-    * operatorUrl
-    * baseurl
-    * baseurlFtp
-    * baseurlRsync
-    * regionOnly
-    * countryOnly
-    * asOnly
-    * prefixOnly
-    * otherCountries
-    * fileMaxsize
-    * publicNotes
-    * enabled/disabled
-    * admin
-    * adminEmail
-    * comments- the following changes will create a request (means: are not effective immediately):
-   * changing rsync ACLs
-   * score -> too much abuse potential
-   
-* deleting a server by user #1:
+### editing server by user
+
+* user signs up
+* clicks on "Administer your servers"
+* clicks on the server inside the group
+* can change/edit the following fields without further approval:
+  * operatorName
+  * operatorUrl
+  * baseurl
+  * baseurlFtp
+  * baseurlRsync
+  * regionOnly
+  * countryOnly
+  * asOnly
+  * prefixOnly
+  * otherCountries
+  * fileMaxsize
+  * publicNotes
+  * enabled/disabled
+  * admin
+  * adminEmail
+  * comments- the following changes will create a request (means: are not effective immediately):
+* changing rsync ACLs
+* score -> too much abuse potential
+
+### deleting a server by user #1
+
+* ACLs will be removed
+* in effect immediately with notification
+
+### deleting a group by user #1
+
+  * in effect immediately with notification
+
+### deleting a server by admin #1
+
+* should be done immediately (notify to user)
+* all entries should be pruned of the database
   * ACLs will be removed
-  * in effect immediately with notification
 
-* deleting a group by user #1:
-  * in effect immediately with notification
+### deleting a group by admin #1
 
-* deleting a server by admin #1:
-  * should be done immediately (notify to user)
-  * all entries should be pruned of the database
-    * ACLs will be removed
-
-* deleting a group by admin #1:
-  * should be done immediately (notify to user ?)
-  * all servers and the group should be deleted
-    * ACLs will be removed
+* should be done immediately (notify to user ?)
+* all servers and the group should be deleted
+  * ACLs will be removed
 
 ### thoughts on the process
 
