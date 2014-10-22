@@ -19,7 +19,6 @@
   * admin (mirrorbrain admin)
   * user  (mirror admin)
 
-
 ### admin user
 
 * can manage everything
@@ -43,15 +42,14 @@
 * can view the log file of the last scan of his mirror
 * can not do the last 6 actions for entities he doesnt own.
 
-
 ## current implementation
 
 ### adding a server
 
-  * user logs in
-  * clicks on "Administer your servers"
-  * Requests new group
-  * once the group is approved he can start adding servers
+* user logs in
+* clicks on "Administer your servers"
+* Requests new group
+* once the group is approved he can start adding servers
 
 ## future
 
@@ -114,7 +112,7 @@
 
 ### deleting a group by user #1
 
-  * in effect immediately with notification
+* in effect immediately with notification
 
 ### deleting a server by admin #1
 
@@ -161,4 +159,3 @@
 * enters the login name of another user
   * other user has to exist
     * do we want to support search, might leak informations about other users.
-
