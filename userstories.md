@@ -9,7 +9,7 @@
 * can browse the server listing (with various filters)
   * can download the squid ACL (technically just a plain text version of the above)
 * can login to the site
-* can search for a file, a distribution or a marker and get's a list of all mirror servers for his region/country (#2)
+* can search for a file, a distribution or a marker and gets a list of all mirror servers for his region/country (#2)
 * can filter for distributions
 * can sort inside the table
 
@@ -32,7 +32,7 @@
 
 * can request a new group
 * can request servers for a group
-* can request acls for a server
+* can request ACLs for a server
 * can add other people to his group
 * can edit his own server details
 * can remove ACLs of his own server
@@ -40,7 +40,7 @@
 * can remove users from his group
 * can request a scan of his mirror
 * can view the log file of the last scan of his mirror
-* can not do the last 6 actions for entities he doesnt own.
+* can not do the last 6 actions for entities he does not own.
 
 ## current implementation
 
@@ -158,4 +158,4 @@
 * clicks "Add user" for the respective group
 * enters the login name of another user
   * other user has to exist
-    * do we want to support search, might leak informations about other users.
+    * do we want to support search, might leak information about other users.
